@@ -1,0 +1,50 @@
+{
+  "title": "About HopeBridge",
+  "subtitle": "We are a global non-profit organization dedicated to empowering underserved communities through sustainable development programs in education, healthcare, and economic opportunity.",
+  "mission": {
+    "title": "Our Mission & Vision",
+    "description": "We believe that every person deserves the opportunity to thrive. Our mission is to create lasting change by addressing the root causes of poverty and inequality through community-driven solutions.",
+    "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+    "values": [
+      {
+        "title": "Community-Driven",
+        "description": "We work alongside communities, listening to their needs and co-creating solutions that work for them."
+      },
+      {
+        "title": "Sustainable Impact",
+        "description": "We focus on long-term solutions that continue to benefit communities for generations to come."
+      },
+      {
+        "title": "Transparency",
+        "description": "We maintain complete transparency in all our operations and ensure every donation is used effectively."
+      },
+      {
+        "title": "Collaboration",
+        "description": "We partner with local organizations, governments, and communities to maximize our impact."
+      }
+    ]
+  },
+  "team": [
+    {
+      "id": 1,
+      "name": "Dr. Sarah Mitchell",
+      "role": "Executive Director",
+      "bio": "20 years of experience in international development and non-profit leadership.",
+      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80"
+    },
+    {
+      "id": 2,
+      "name": "James Okafor",
+      "role": "Programs Director",
+      "bio": "Expert in sustainable agriculture and community development programs in Africa.",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
+    },
+    {
+      "id": 3,
+      "name": "Dr. Emily Chen",
+      "role": "Healthcare Director",
+      "bio": "Public health specialist focused on mobile health solutions in underserved areas.",
+      "image": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=200&q=80"
+    }
+  ]
+}

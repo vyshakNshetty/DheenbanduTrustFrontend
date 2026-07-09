@@ -1,0 +1,54 @@
+{
+  "title": "Our Gallery",
+  "subtitle": "Explore moments of impact from our programs and initiatives around the world.",
+  "images": [
+    {
+      "id": 1,
+      "title": "Children in Classroom",
+      "description": "Students participating in our education program in rural Kenya.",
+      "category": "education",
+      "url": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
+      "location": "Kenya"
+    },
+    {
+      "id": 2,
+      "title": "Medical Camp",
+      "description": "Our mobile health clinic providing free checkups.",
+      "category": "healthcare",
+      "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
+      "location": "Nigeria"
+    },
+    {
+      "id": 3,
+      "title": "Community Workshop",
+      "description": "Women participating in our entrepreneurship training program.",
+      "category": "women",
+      "url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80",
+      "location": "India"
+    },
+    {
+      "id": 4,
+      "title": "Sustainable Farming",
+      "description": "Farmers learning sustainable agriculture techniques.",
+      "category": "sustainability",
+      "url": "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80",
+      "location": "Brazil"
+    },
+    {
+      "id": 5,
+      "title": "Community Gathering",
+      "description": "Community members coming together for a project launch.",
+      "category": "community",
+      "url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+      "location": "Philippines"
+    },
+    {
+      "id": 6,
+      "title": "Volunteer Team",
+      "description": "Our volunteers working together on a community project.",
+      "category": "volunteers",
+      "url": "https://images.unsplash.com/photo-1494859802809-d069c3b71a8a?w=800&q=80",
+      "location": "Global"
+    }
+  ]
+}

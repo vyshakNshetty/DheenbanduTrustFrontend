@@ -1,0 +1,50 @@
+{
+  "title": "Our Activities",
+  "subtitle": "Discover the various programs and initiatives we're running to create positive change in communities worldwide.",
+  "activities": [
+    {
+      "id": 1,
+      "title": "Back to School Campaign",
+      "description": "Providing school supplies, uniforms, and scholarships to 500+ children in rural communities.",
+      "category": "education",
+      "image": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80",
+      "date": "January - March 2026",
+      "location": "Rural Communities, Kenya",
+      "participants": 500,
+      "status": "Ongoing"
+    },
+    {
+      "id": 2,
+      "title": "Mobile Health Clinics",
+      "description": "Bringing essential healthcare services to remote villages through mobile medical units.",
+      "category": "healthcare",
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80",
+      "date": "February - April 2026",
+      "location": "Remote Villages, Nigeria",
+      "participants": 300,
+      "status": "Ongoing"
+    },
+    {
+      "id": 3,
+      "title": "Women's Entrepreneurship Program",
+      "description": "Training and funding women-led businesses in underserved communities.",
+      "category": "women",
+      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80",
+      "date": "March - June 2026",
+      "location": "Various Locations, India",
+      "participants": 200,
+      "status": "Ongoing"
+    },
+    {
+      "id": 4,
+      "title": "Sustainable Farming Initiative",
+      "description": "Teaching sustainable farming techniques to improve food security and income.",
+      "category": "sustainability",
+      "image": "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600&q=80",
+      "date": "April - September 2026",
+      "location": "Farming Communities, Brazil",
+      "participants": 150,
+      "status": "Upcoming"
+    }
+  ]
+}

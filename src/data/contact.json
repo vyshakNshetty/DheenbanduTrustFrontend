@@ -1,0 +1,26 @@
+{
+  "title": "Contact Us",
+  "subtitle": "Have questions? We'd love to hear from you. Reach out and we'll get back to you as soon as possible.",
+  "contactInfo": [
+    {
+      "title": "Address",
+      "value": "WXC3+QVM, Siddhartha Nagar, Chamarajanagar, Karnataka 571313, India",
+      "icon": "FaMapMarkerAlt"
+    },
+    {
+      "title": "Phone",
+      "value": "+91 6360421077",
+      "icon": "FaPhone"
+    },
+    {
+      "title": "Email",
+      "value": "deenabandhuoffice@gmail.com",
+      "icon": "FaEnvelope"
+    },
+    {
+      "title": "Hours",
+      "value": "Mon-Fri: 9AM - 6PM EST",
+      "icon": "FaClock"
+    }
+  ]
+}
