@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect } from 'react'
 import {  Routes, Route } from 'react-router-dom'
 
 import { ThemeProvider } from './context/ThemeContext'
+import { ActivityProvider } from "./context/ActivityContext";
 import { ToastProvider } from './context/ToastContext'
 import LoadingSpinner from './components/common/LoadingSpinner'
 import ScrollToTop from './components/common/ScrollToTop'
@@ -26,6 +27,7 @@ function App() {
     
       <ThemeProvider>
         <ToastProvider>
+          <ActivityProvider>
           
             <ScrollToTop />
             <ErrorBoundary>
@@ -46,6 +48,7 @@ function App() {
               </Suspense>
             </ErrorBoundary>
           
+          </ActivityProvider>
         </ToastProvider>
       </ThemeProvider>
     
