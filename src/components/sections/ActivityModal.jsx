@@ -42,7 +42,7 @@ const ActivityModal = () => {
                 {selectedActivity.description}
               </p>
 
-              <div className="grid md:grid-cols-2 gap-4 mt-8">
+              {/* <div className="grid md:grid-cols-2 gap-4 mt-8">
 
                 <div className="flex items-center gap-3">
                   <FaCalendarAlt />
@@ -63,7 +63,7 @@ const ActivityModal = () => {
                   <FaClock />
                   {selectedActivity.status}
                 </div>
-                </div>
+                </div> */}
                 
                 </div>
                 </motion.div>

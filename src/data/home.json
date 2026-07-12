@@ -24,17 +24,38 @@
     ]
   },
   "aboutPreview": {
-    "title": "Who We Are",
-    "subtitle": "A Global Movement for Change",
-    "description": "Deenabandhu Trust is a non-profit organization dedicated to empowering underserved communities. We believe that every person deserves access to quality education, healthcare, and opportunities for a better future.",
-    "image": "https://images.unsplash.com/photo-1494859802809-d069c3b71a8a?w=800&q=80",
-    "highlights": [
-      "Non-profit organization since 2010",
-      "Operating in 30+ countries",
-      "500+ community projects completed",
-      "98% of donations go to programs"
-    ]
-  },
+  "title": "Who We Are",
+
+  "subtitle": "Building Brighter Futures Since 1992",
+
+  "shortDescription": "Deenabandhu Trust is a voluntary organization committed to the care, education, and holistic development of children from disadvantaged and vulnerable backgrounds, irrespective of caste, creed, or religion. Founded in 1992 by Prof. G. S. Jayadev in Chamarajanagara, Karnataka, the Trust has transformed countless lives through compassion and education.",
+
+  "paragraphs": [
+    "Deenabandhu is a voluntary organization committed to the care, education, and holistic development of children from disadvantaged and vulnerable backgrounds, irrespective of caste, creed, or religion. The organization was founded in 1992 by Prof. G. S. Jayadev in Chamarajanagara, Karnataka.",
+
+    "Deenabandhu's humble beginnings comprised of a small group of six boys living in a rented house. Today, Deenabandhu Children's Home nurtures around 40 boys and 40 girls by providing them with a safe home, quality education, healthcare, and opportunities for holistic development.",
+
+    "The Trust also runs a school for children from neighbouring villages, offering education from LKG to 10th Standard. Children from underprivileged families receive quality education at a highly subsidized cost, while INDO-MIM fully supports the school's operational expenses.",
+
+    "To strengthen public education, Deenabandhu established the Teacher Resource Center (TRC), which promotes experiential learning across Karnataka. Today, TRC works with more than 200 teachers from over 240 government schools, positively impacting nearly 10,000 students.",
+
+    "Beyond education, the Trust provides scholarships for deserving rural students pursuing higher education, empowers women through skill development programs, and actively participates in biodiversity conservation initiatives to build sustainable communities."
+  ],
+
+  "videoUrl": "https://www.youtube.com/embed/_k62nGcF7wk",
+
+  "highlights": [
+    "Founded in 1992 by Prof. G. S. Jayadev",
+    "Children's Home for 80+ Children",
+    "School from LKG to 10th Standard",
+    "Teacher Resource Center (TRC)",
+    "200+ Teachers from 240 Government Schools",
+    "10,000+ Students Benefited",
+    "Scholarships for Rural Students",
+    "Women Skill Development",
+    "Biodiversity Conservation"
+  ]
+},
   "programs": {
     "title": "Our Programs",
     "subtitle": "Creating Lasting Impact",

@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 // import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import activitiesData from '../data/activities.json'
-import { useActivity } from '../context/ActivityContext';
-import ActivityModal from '../components/sections/ActivityModal'; 
+import { useActivity } from "../context/ActivityContext";
+import ActivityModal from "../components/sections/ActivityModal";
 import { FaCalendarAlt, FaMapMarkerAlt, FaUsers, FaClock } from 'react-icons/fa'
 
 const Activities = () => {
   const [filter, setFilter] = useState('all')
   const activities = activitiesData.activities
-  const {openActivity} = useActivity();
+  const {openActivity} = useActivity()
 
   const categories = ['all', ...new Set(activities.map(a => a.category))]
 
@@ -69,7 +69,9 @@ const Activities = () => {
                 transition={{ delay: index * 0.05 }}
                 className="card overflow-hidden group"
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 overflow-hidden"
+                 onClick={() => openActivity(activity)}
+                 >
                   <img
                     src={activity.image}
                     alt={activity.title}
@@ -90,8 +92,7 @@ const Activities = () => {
                     {activity.description}
                   </p>
                   <div className="grid grid-cols-2 gap-3 text-sm">
-                    
-                    <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                    {/* <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                       <FaCalendarAlt className="text-primary-500" />
                       <span>{activity.date}</span>
                     </div>
@@ -100,14 +101,14 @@ const Activities = () => {
                       <span>{activity.location}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                      <FaUsers className="text-prim participants</span>
+                      <FaUsers className="text-primary-500" />
+                      <span>{activity.participants} participants</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                       <FaClock className="text-primary-500" />
                       <span>{activity.status}</span>
-                    </div>
-                    <div className="mt-6 flex justify-ary-500" />
-                      <span>{activity.participants}end">
+                    </div> */}
+                    <div className="mt-6 flex justify-start">
   <button
     onClick={() => openActivity(activity)}
     className="px-5 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition"
