@@ -42,7 +42,7 @@ const DonateHero = () => {
             transition={{ delay: 0.4 }}
             className="mt-8 text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-8"
           >
-            {donateData.subtitle}
+            {/* {donateData.subtitle} */}
           </motion.p>
 
           {/* Buttons */}
@@ -68,64 +68,14 @@ const DonateHero = () => {
               className="inline-flex items-center gap-3 border border-white/30 hover:bg-white/10 px-8 py-4 rounded-xl font-semibold backdrop-blur-md transition-all hover:-translate-y-1"
             >
               <FaGlobe />
-              International Donation
+              Donations from USA
             </a>
 
           </motion.div>
 
-          {/* Trust Badges */}
+          
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="grid md:grid-cols-3 gap-5 mt-20"
-          >
-
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-
-              <FaShieldAlt className="text-3xl text-emerald-300 mx-auto mb-4" />
-
-              <h4 className="font-bold text-lg">
-                Secure Donations
-              </h4>
-
-              <p className="text-sm text-gray-200 mt-2">
-                Your contribution is transferred safely through trusted banking and UPI channels.
-              </p>
-
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-
-              <FaHeart className="text-3xl text-pink-300 mx-auto mb-4" />
-
-              <h4 className="font-bold text-lg">
-                Transparent Usage
-              </h4>
-
-              <p className="text-sm text-gray-200 mt-2">
-                Every donation directly supports education, healthcare, and rural development.
-              </p>
-
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-
-              <FaGlobe className="text-3xl text-cyan-300 mx-auto mb-4" />
-
-              <h4 className="font-bold text-lg">
-                Global Support
-              </h4>
-
-              <p className="text-sm text-gray-200 mt-2">
-                Indian and international donors can contribute easily through multiple methods.
-              </p>
-
-            </div>
-
-          </motion.div>
-
+        
         </div>
 
       </div>

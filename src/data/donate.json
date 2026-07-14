@@ -5,18 +5,18 @@
   "india": {
     "description": "For donations within India, you can contribute through Net Banking, NEFT, RTGS, IMPS, Cheque, or Direct Bank Transfer using the details below.",
 
-    "accountName": "DEENABANDHU TRUST",
-    "accountNumber": "XXXXXXXXXXXX",
+    "accountName": "Deena Bandhu (R)",
+    "accountNumber": "538294330",
 
     "bankName": "Indian Bank",
 
-    "branch": "Chamarajanagar",
+    "branch": "Chamarajanagar (505)",
 
-    "ifsc": "IDIB000XXXX",
+    "ifsc": "IDIB000C008",
 
-    "micr": "571000000",
+    "micr": "571019002",
 
-    "address": "Indian Bank Branch, Chamarajanagar, Karnataka - 571313"
+    "address": "Indian Bank (bank code: 505), 'Bramaramba Extension', Chamarajanagara - 571313 Karnataka"
   },
 
   "upi": {
@@ -33,74 +33,17 @@
   },
 
   "usa": {
-    "title": "International Donations",
+    "title": "Donations from USA",
 
     "description": "Supporters outside India can contribute through our trusted international partner. Every international donation directly supports our education, healthcare, food assistance, and rural development initiatives.",
 
     "buttonText": "View Donation Process",
 
     "buttonLink": "/international-donation"
-  },
-
-  "impact": {
-    "title": "Your Contribution Creates Impact",
-
-    "items": [
-      {
-        "icon": "📚",
-        "title": "Education",
-        "description": "Providing quality education and learning resources for underprivileged children."
-      },
-      {
-        "icon": "🍛",
-        "title": "Food Support",
-        "description": "Supplying nutritious meals to families and children in need."
-      },
-      {
-        "icon": "❤️",
-        "title": "Healthcare",
-        "description": "Organizing free medical camps, medicines, and health awareness programs."
-      },
-      {
-        "icon": "🌱",
-        "title": "Rural Development",
-        "description": "Empowering villages through sustainable development projects."
-      }
-    ]
-  },
-
-  "transparency": {
-    "title": "Donation Transparency",
-
-    "items": [
-      "Registered Charitable Trust",
-      "Secure Bank Transfer",
-      "UPI Payments Accepted",
-      "Transparent Fund Utilization",
-      "Tax Benefit Eligible (Applicable Rules)",
-      "100% Accountable Donation Process"
-    ]
-  },
-"faq": [
-  {
-    "question": "How can I donate?",
-    "answer": "You can donate through Bank Transfer, NEFT, RTGS, IMPS, Cheque, or by scanning our UPI QR Code."
-  },
-  {
-    "question": "Can I donate from outside India?",
-    "answer": "Yes. International donors can contribute through our overseas partner organization."
-  },
-  {
-    "question": "Will I receive a donation receipt?",
-    "answer": "Yes. Once your donation is received, an official receipt will be issued."
-  },
-  {
-    "question": "Where is my donation used?",
-    "answer": "Your contribution supports education, healthcare, food distribution, rural development, and community welfare programs."
-  },
-  {
-    "question": "Is my donation secure?",
-    "answer": "Yes. All donations are processed through secure banking channels and trusted payment methods."
   }
-]
+
+
+
+ 
+
 }

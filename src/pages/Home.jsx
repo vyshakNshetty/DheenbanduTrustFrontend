@@ -9,7 +9,6 @@ const AboutPreview = lazy(() => import('../components/sections/AboutPreview'))
 const Programs = lazy(() => import('../components/sections/Programs'))
 const SuccessStories = lazy(() => import('../components/sections/SuccessStories'))
 const VolunteerCTA = lazy(() => import('../components/sections/VolunteerCTA'))
-const DonationCTA = lazy(() => import('../components/sections/DonationCTA'))
 const Testimonials = lazy(() => import('../components/sections/Testimonials'))
 const GalleryPreview = lazy(() => import('../components/sections/GalleryPreview'))
 const Newsletter = lazy(() => import('../components/sections/Newsletter'))
@@ -27,10 +26,9 @@ const Home = () => {
         <Statistics />
         <AboutPreview />
         <Programs />
-        <SuccessStories />
+        {/* <SuccessStories /> */}
         <VolunteerCTA />
-        <DonationCTA />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <GalleryPreview />
         <Newsletter />
       </Suspense>

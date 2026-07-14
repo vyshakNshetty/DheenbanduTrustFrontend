@@ -1,50 +1,105 @@
 {
-  "title": "About HopeBridge",
-  "subtitle": "We are a global non-profit organization dedicated to empowering underserved communities through sustainable development programs in education, healthcare, and economic opportunity.",
-  "mission": {
-    "title": "Our Mission & Vision",
-    "description": "We believe that every person deserves the opportunity to thrive. Our mission is to create lasting change by addressing the root causes of poverty and inequality through community-driven solutions.",
-    "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
-    "values": [
-      {
-        "title": "Community-Driven",
-        "description": "We work alongside communities, listening to their needs and co-creating solutions that work for them."
-      },
-      {
-        "title": "Sustainable Impact",
-        "description": "We focus on long-term solutions that continue to benefit communities for generations to come."
-      },
-      {
-        "title": "Transparency",
-        "description": "We maintain complete transparency in all our operations and ensure every donation is used effectively."
-      },
-      {
-        "title": "Collaboration",
-        "description": "We partner with local organizations, governments, and communities to maximize our impact."
-      }
+  "title": "About Deenabandhu Trust",
+
+  "subtitle": "Serving Children, Families and Communities Since 1992.",
+
+  "founder": {
+    "title": "The Founder",
+    "subtitle": "A Visionary Who Believed Every Child Deserves a Home",
+
+    "image": "/images/about/founder.jpg",
+
+    "description": [
+      "Prof. G. S. Jayadeva, the founder of Deenabandhu Trust, comes from a distinguished literary family as the son of Rashtrakavi G. S. Shivarudrappa.",
+
+      "With nearly forty years of experience as an educationist and social worker, he dedicated his life to caring for orphaned and underprivileged children while promoting quality education and community development.",
+
+      "His contributions have earned numerous recognitions, including the Mahatma Gandhi Seva Award – Karnataka. He is also the author of several Kannada books on education, child development, environment and social change."
     ]
   },
-  "team": [
+
+  "journey": {
+    "title": "Our Journey",
+    "subtitle": "From Six Children to Thousands of Lives",
+
+    "image": "/images/about/journey.jpg",
+
+    "description": [
+      "Deenabandhu began in 1992 with only six boys living in a rented house.",
+
+      "Support from generous donors helped build cottages for children and later establish a dedicated home for girls.",
+
+      "The Trust expanded by starting a school from LKG to 10th Standard and later established the Teacher Resource Center promoting experiential learning throughout Karnataka.",
+
+      "Today Deenabandhu impacts thousands of children, teachers and rural communities every year."
+    ]
+  },
+
+  "vision": {
+    "title": "Our Vision",
+
+    "image": "/images/about/vision.jpg",
+
+    "description": "To build a compassionate society where every child, irrespective of caste, creed or economic background, enjoys equal opportunities for education, dignity, safety and holistic development."
+  },
+
+  "mission": {
+    "title": "Our Mission",
+
+    "image": "/images/about/mission.jpg",
+
+    "points": [
+      "Provide loving homes for vulnerable children.",
+      "Deliver quality and affordable education.",
+      "Promote experiential learning through Teacher Resource Centers.",
+      "Empower women through skill development.",
+      "Support deserving students through scholarships.",
+      "Protect biodiversity and encourage sustainable living."
+    ]
+  },
+
+  "teams": [
     {
       "id": 1,
-      "name": "Dr. Sarah Mitchell",
-      "role": "Executive Director",
-      "bio": "20 years of experience in international development and non-profit leadership.",
-      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80"
+      "name": "Prof. G. S. Jayadeva",
+      "role": "Founder",
+      "image": "/images/team/founder.jpg"
     },
     {
       "id": 2,
-      "name": "James Okafor",
-      "role": "Programs Director",
-      "bio": "Expert in sustainable agriculture and community development programs in Africa.",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
+      "name": "Managing Trustee",
+      "role": "Managing Trustee",
+      "image": "/images/team/trustee.jpg"
     },
     {
       "id": 3,
-      "name": "Dr. Emily Chen",
-      "role": "Healthcare Director",
-      "bio": "Public health specialist focused on mobile health solutions in underserved areas.",
-      "image": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=200&q=80"
+      "name": "Core Team",
+      "role": "Program Coordinator",
+      "image": "/images/team/team1.jpg"
     }
-  ]
+  ],
+
+  "team": [
+  {
+    "id": 1,
+    "name": "Prof. G. S. Jayadeva",
+    "role": "Founder",
+    "bio": "Founder of Deenabandhu Trust and an educationist with over four decades of experience dedicated to child welfare, education, and community development.",
+    "image": "/images/team/founder.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Managing Trustee",
+    "role": "Managing Trustee",
+    "bio": "Leads the administration and strategic development of Deenabandhu Trust while ensuring quality education and holistic care for children.",
+    "image": "/images/team/trustee.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Core Team",
+    "role": "Program Coordinator",
+    "bio": "Coordinates educational programs, Teacher Resource Centre initiatives, scholarships, and community outreach across Karnataka.",
+    "image": "/images/team/team1.jpg"
+  }
+]
 }

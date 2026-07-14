@@ -76,13 +76,13 @@ const Hero = () => {
   }
 
   // const hero = heroData.hero
-
+//linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)),
   return (
     <section
       ref={ref}
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url(${hero.background_image})`,
+        backgroundImage: `  url(${hero.background_image})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

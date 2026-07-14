@@ -13,23 +13,32 @@ export const api = {
     }
   },
 
-  post: async (endpoint, data) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      if (!response.ok) throw new Error('Network response was not ok')
-        return await response.json()
-    } catch (error) {
-      console.error('API POST error:', error)
-      throw error
-    }
-  },
+post: async (endpoint, data) => {
+  try {
+    const isFormData = data instanceof FormData;
 
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "POST",
+      headers: isFormData
+        ? {}
+        : {
+            "Content-Type": "application/json",
+          },
+      body: isFormData ? data : JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("API Error:", error);
+      throw error;
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("API POST error:", error);
+    throw error;
+  }
+},
   put: async (endpoint, data) => {
     try {
       const isFormData = data instanceof FormData;

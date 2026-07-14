@@ -32,7 +32,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2 text-2xl font-bold">
-              <GiHand className="text-primary-400" />
+              {/* <GiHand className="text-primary-400" /> */}
               <span>Deenabandhu Trust</span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">

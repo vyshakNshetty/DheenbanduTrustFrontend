@@ -3,7 +3,9 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { FaBars, FaTimes, FaSun, FaMoon, FaHeart, FaUser } from 'react-icons/fa'
-import { GiHand } from 'react-icons/gi'
+// import { GiHand } from 'react-icons/gi'
+import deena from "../../../public/dennabandu.png"
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -46,12 +48,10 @@ const Navbar = () => {
     >
       <nav className="container-custom flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold">
-          <motion.div
-            whileHover={{ rotate: 10, scale: 1.1 }}
-            className="text-primary-600"
-          >
-            <GiHand />
-          </motion.div>
+      
+            {/* <GiHand /> */}
+            <img src={deena} alt="DheenabandhuTrust" className="w-auto h-16 object-contain"/>
+    
           <span className="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
             DheenabandhuTrust
           </span>

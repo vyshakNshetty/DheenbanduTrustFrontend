@@ -19,9 +19,9 @@ const AboutPreview = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            <span className="text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider">
+            {/* <span className="text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider">
               {data.subtitle}
-            </span>
+            </span> */}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 text-dark dark:text-white">
               {data.title}
             </h2>

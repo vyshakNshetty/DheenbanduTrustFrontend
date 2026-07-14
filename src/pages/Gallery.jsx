@@ -1,35 +1,80 @@
-import React, { useState, useMemo } from 'react'
-// import { Helmet } from 'react-helmet-async'
+import React, { useState, useMemo, useEffect } from "react";// import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import galleryData from '../data/gallery.json'
+// import galleryData from '../data/gallery.json'
+import { galleryService } from "../services/galleryService";
+
 
 const Gallery = () => {
   const [filter, setFilter] = useState('all')
   const [selectedImage, setSelectedImage] = useState(null)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [sortBy, setSortBy] = useState("newest");
+  const INITIAL_COUNT = 6;
+const [showAllGallery, setShowAllGallery] = useState(false);
+const [showAllThumbs, setShowAllThumbs] = useState(false);
+const [galleryData, setGalleryData] = useState({
+  title: "Gallery",
+  subtitle: "Explore our moments",
+  images: [],
+});
 
-  const categories = useMemo(() => {
-    const cats = ['all', ...new Set(galleryData.images.map(img => img.category))]
-    return cats
-  }, [])
+const [loading, setLoading] = useState(true);
 
-  const filteredImages = useMemo(() => {
-    return filter === 'all' 
-      ? galleryData.images 
-      : galleryData.images.filter(img => img.category === filter)
-  }, [filter])
+useEffect(() => {
+  loadGallery();
+}, []);
 
-  const openLightbox = (image, index) => {
-    setSelectedImage(image)
-    setCurrentIndex(index)
-    document.body.style.overflow = 'hidden'
+
+const loadGallery = async () => {
+  try {
+    const response = await galleryService.getImages();
+
+    setGalleryData({
+      title: "Gallery",
+      subtitle: "Explore our moments",
+      images: response,
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
   }
+};
 
-  const closeLightbox = () => {
-    setSelectedImage(null)
-    document.body.style.overflow = 'unset'
-  }
+const categories = useMemo(() => {
+    const images = galleryData.images || [];
+    return ["all", ...new Set(images.map(img => img.category))];
+}, [galleryData.images]);
+
+const filteredImages = useMemo(() => {
+const allImages = galleryData.images || [];
+
+let images =
+    filter === "all"
+      ? [...allImages]
+      : allImages.filter(img => img.category === filter);
+
+  images.sort((a, b) =>
+  sortBy === "newest"
+    ? new Date(b.created_at) - new Date(a.created_at)
+    : new Date(a.created_at) - new Date(b.created_at)
+);
+
+  return images;
+}, [galleryData.images, filter, sortBy]);
+
+ const openLightbox = (image, index) => {
+  setSelectedImage(image);
+  setCurrentIndex(index);
+  setShowAllThumbs(false);
+  document.body.style.overflow = "hidden";
+};
+const closeLightbox = () => {
+  setSelectedImage(null);
+  setShowAllThumbs(false);
+  document.body.style.overflow = "unset";
+};
 
   const navigateLightbox = (direction) => {
     const newIndex = (currentIndex + direction + filteredImages.length) % filteredImages.length
@@ -37,6 +82,14 @@ const Gallery = () => {
     setSelectedImage(filteredImages[newIndex])
   }
 
+
+  if (loading) {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      Loading...
+    </div>
+  );
+}
   return (
     <>
       {/* <Helmet>
@@ -60,10 +113,16 @@ const Gallery = () => {
             </p>
           </motion.div>
         </div>
+        
       </section>
+      
 
       <section className="section-padding">
+        
+        
         <div className="container-custom">
+          
+          
           <div className="flex flex-wrap gap-3 justify-center mb-12">
             {categories.map((category) => (
               <button
@@ -78,91 +137,218 @@ const Gallery = () => {
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
             ))}
+            <select
+  value={sortBy}
+  onChange={(e) => setSortBy(e.target.value)}
+  className="px-4 py-2 rounded-xl border border-gray-200 bg-white shadow-sm"
+>
+  <option value="newest">Newest First</option>
+  <option value="oldest">Oldest First</option>
+</select>
           </div>
+          
 
-          <motion.div
-            layout
-            className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
-          >
-            {filteredImages.map((image, index) => (
-              <motion.div
-                key={image.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
-                className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden"
-                onClick={() => openLightbox(image, index)}
-              >
-                <img
-                  src={image.url}
-                  alt={image.title}
-                  className="w-full h-auto rounded-2xl transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <div className="text-white">
-                    <h3 className="font-semibold">{image.title}</h3>
-                    <p className="text-sm text-gray-300">{image.location}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+        <motion.div
+  layout
+  className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
+>
+  {(showAllGallery
+    ? filteredImages
+    : filteredImages.slice(0, INITIAL_COUNT)
+  ).map((image, index) => (
+    <motion.div
+      key={image.id}
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4 }}
+      className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden"
+      onClick={() => openLightbox(image, index)}
+    >
+      <img
+        src={image.image}
+        alt={image.title}
+        className="w-full h-auto rounded-2xl transition-transform duration-500 group-hover:scale-105"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+
+        <div className="text-white">
+
+          <h3 className="font-semibold">
+            {image.title}
+          </h3>
+
+          <p className="text-sm">
+            {image.location}
+          </p>
+
+        </div>
+
+      </div>
+
+    </motion.div>
+  ))}
+
+  {!showAllGallery && filteredImages.length > INITIAL_COUNT && (
+    <motion.div
+      layout
+      whileHover={{ scale: 1.03 }}
+      onClick={() => setShowAllGallery(true)}
+      className="break-inside-avoid h-72 rounded-2xl overflow-hidden cursor-pointer relative"
+    >
+      <img
+        src={filteredImages[INITIAL_COUNT].image}
+        alt=""
+        className="w-full h-full object-cover"
+      />
+
+      <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center text-white">
+
+        <h2 className="text-5xl font-bold">
+          +{filteredImages.length - INITIAL_COUNT}
+        </h2>
+
+        <p>More Photos</p>
+
+      </div>
+
+    </motion.div>
+  )}
+</motion.div>
         </div>
       </section>
 
       {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-            onClick={closeLightbox}
-          >
-            <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors text-3xl"
-            >
-              <FaTimes />
-            </button>
+     <AnimatePresence>
+  {selectedImage && (
 
-            <button
-              onClick={(e) => { e.stopPropagation(); navigateLightbox(-1) }}
-              className="absolute left-6 text-white/70 hover:text-white transition-colors text-3xl"
-            >
-              <FaChevronLeft />
-            </button>
+    <motion.div
+      initial={{ opacity:0 }}
+      animate={{ opacity:1 }}
+      exit={{ opacity:0 }}
+      className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-6"
+      onClick={closeLightbox}
+    >
 
-            <button
-              onClick={(e) => { e.stopPropagation(); navigateLightbox(1) }}
-              className="absolute right-6 text-white/70 hover:text-white transition-colors text-3xl"
-            >
-              <FaChevronRight />
-            </button>
+      {/* Close */}
+      <button
+        onClick={closeLightbox}
+        className="absolute top-6 right-6 text-white text-3xl"
+      >
+        <FaTimes/>
+      </button>
 
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="max-w-6xl max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
+      {/* Prev */}
+      <button
+        onClick={(e)=>{
+          e.stopPropagation();
+          navigateLightbox(-1);
+        }}
+        className="absolute left-6 text-white text-4xl"
+      >
+        <FaChevronLeft/>
+      </button>
+
+      {/* Next */}
+      <button
+        onClick={(e)=>{
+          e.stopPropagation();
+          navigateLightbox(1);
+        }}
+        className="absolute right-6 text-white text-4xl"
+      >
+        <FaChevronRight/>
+      </button>
+
+      <motion.div
+        initial={{scale:.9}}
+        animate={{scale:1}}
+        exit={{scale:.9}}
+        className="max-w-6xl w-full"
+        onClick={(e)=>e.stopPropagation()}
+      >
+
+        <img
+          src={selectedImage.image}
+          alt={selectedImage.title}
+          className="w-full max-h-[70vh] object-contain rounded-xl"
+        />
+
+        <div className="text-center text-white mt-5">
+
+          <h2 className="text-2xl font-bold">
+            {selectedImage.title}
+          </h2>
+
+          <p className="text-gray-400">
+            {selectedImage.location}
+          </p>
+
+        </div>
+
+        {/* Thumbnails */}
+        <div className="flex gap-3 overflow-x-auto mt-6 pb-2">
+
+          {(showAllThumbs
+            ? filteredImages
+            : filteredImages.slice(0,INITIAL_COUNT)
+          ).map((img,index)=>(
+
+            <img
+              key={img.id}
+              src={img.image}
+              alt=""
+              onClick={()=>{
+                setSelectedImage(img)
+                setCurrentIndex(index)
+              }}
+              className={`w-24 h-20 rounded-lg object-cover cursor-pointer border-4 flex-shrink-0 ${
+                selectedImage.id===img.id
+                  ? "border-primary-500"
+                  : "border-transparent"
+              }`}
+            />
+
+          ))}
+
+          {!showAllThumbs && filteredImages.length>INITIAL_COUNT && (
+
+            <div
+              onClick={() => setShowAllThumbs(true)}
+              className="relative w-24 h-20 rounded-lg overflow-hidden cursor-pointer flex-shrink-0"
             >
+
               <img
-                src={selectedImage.url}
-                alt={selectedImage.title}
-                className="w-full h-auto max-h-[80vh] object-contain rounded-2xl"
+                src={filteredImages[INITIAL_COUNT].image}
+                className="w-full h-full object-cover"
+                alt=""
               />
-              <div className="mt-4 text-white text-center">
-                <h3 className="text-xl font-semibold">{selectedImage.title}</h3>
-                <p className="text-gray-400">{selectedImage.location}</p>
+
+              <div className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white">
+
+                <h2 className="text-lg font-bold">
+                  +{filteredImages.length-INITIAL_COUNT}
+                </h2>
+
+                <p className="text-xs">
+                  More
+                </p>
+
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+            </div>
+
+          )}
+
+        </div>
+
+      </motion.div>
+
+    </motion.div>
+
+  )}
+</AnimatePresence>
     </>
   )
 }
