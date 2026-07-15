@@ -1,4 +1,4 @@
-# HopeBridge — NGO Platform
+# DeenabandhuTrust — NGO Platform
 
 A modern, production-ready NGO platform built with React 19+, Vite, and Tailwind CSS.
 

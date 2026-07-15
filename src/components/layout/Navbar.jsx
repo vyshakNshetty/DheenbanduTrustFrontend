@@ -82,13 +82,13 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             aria-label="Toggle theme"
           >
             {isDark ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-700" />}
-          </button>
+          </button> */}
 
           <Link
             to="/donate"

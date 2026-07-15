@@ -99,14 +99,11 @@ const AboutPreview = () => {
 
       <div className="p-8 md:p-12">
 
-        <h2 className="text-4xl font-bold mb-2">
+        <h2 className="text-4xl font-bold mb-4">
           {data.title}
         </h2>
 
-        <p className="text-primary-600 font-semibold mb-8">
-          {data.subtitle}
-        </p>
-
+       
         {/* Paragraphs */}
 
         <div className="space-y-6">

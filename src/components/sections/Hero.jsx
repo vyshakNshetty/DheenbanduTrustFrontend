@@ -120,14 +120,14 @@ const Hero = () => {
             variants={itemVariants}
             className="mt-10 flex flex-col sm:flex-row gap-4"
           >
-            <Link
+            {/* <Link
               to="/donate"
               className="btn-primary gap-3 text-base px-8 py-4 group"
             >
               <FaHeart className="group-hover:scale-110 transition-transform" />
               Donate Now
               <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </Link> */}
             <Link
               to="/get-involved"
               className="btn-outline gap-3 text-base px-8 py-4"

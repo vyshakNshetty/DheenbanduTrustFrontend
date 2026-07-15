@@ -19,14 +19,7 @@ const About = () => {
             {data.title}
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: .2 }}
-            className="mt-6 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
-          >
-            {data.subtitle}
-          </motion.p>
+          
         </div>
       </section>
 
@@ -39,11 +32,9 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-primary-600 uppercase font-semibold tracking-widest">
-              {data.founder.subtitle}
-            </span>
+           
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-4xl font-bold ">
               {data.founder.title}
             </h2>
 
@@ -93,10 +84,7 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-primary-600 uppercase font-semibold tracking-widest">
-              {data.journey.subtitle}
-            </span>
-
+            
             <h2 className="text-4xl font-bold mt-3">
               {data.journey.title}
             </h2>
@@ -243,7 +231,7 @@ const About = () => {
   <div className="container-custom">
 
     <h2 className="text-4xl font-bold text-center text-dark mb-14">
-      Our Team
+      Board of Trustees
     </h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

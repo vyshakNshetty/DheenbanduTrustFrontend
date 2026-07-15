@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-dark pt-20">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark ">
       {/* Mobile Toggle */}
       <button
         onClick={toggleSidebar}
