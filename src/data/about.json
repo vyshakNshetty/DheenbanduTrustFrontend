@@ -1,8 +1,5 @@
 {
-  "title": "About us",
-
-  "subtitle": "Serving Children, Families and Communities Since 1992.",
-
+  
   "founder": {
     "title": "The Founder",
     "subtitle": "A Visionary Who Believed Every Child Deserves a Home",
@@ -35,49 +32,7 @@
     ]
   },
 
-  "vision": {
-    "title": "Our Vision",
 
-    "image": "/images/about/vision.jpg",
-
-    "description": "To build a compassionate society where every child, irrespective of caste, creed or economic background, enjoys equal opportunities for education, dignity, safety and holistic development."
-  },
-
-  "mission": {
-    "title": "Our Mission",
-
-    "image": "/images/about/mission.jpg",
-
-    "points": [
-      "Provide loving homes for vulnerable children.",
-      "Deliver quality and affordable education.",
-      "Promote experiential learning through Teacher Resource Centers.",
-      "Empower women through skill development.",
-      "Support deserving students through scholarships.",
-      "Protect biodiversity and encourage sustainable living."
-    ]
-  },
-
-  "teams": [
-    {
-      "id": 1,
-      "name": "Prof. G. S. Jayadeva",
-      "role": "Founder",
-      "image": "/images/team/founder.jpg"
-    },
-    {
-      "id": 2,
-      "name": "Managing Trustee",
-      "role": "Managing Trustee",
-      "image": "/images/team/trustee.jpg"
-    },
-    {
-      "id": 3,
-      "name": "Core Team",
-      "role": "Program Coordinator",
-      "image": "/images/team/team1.jpg"
-    }
-  ],
 
   "team": [
   {

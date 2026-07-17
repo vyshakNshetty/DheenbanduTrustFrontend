@@ -75,11 +75,11 @@ const HeroPreview = ({ form, previewImage }) => {
 
             {/* Badge */}
 
-            <span className="inline-flex self-start rounded-full border border-white/30 bg-white/20 backdrop-blur-md px-5 py-2 text-sm font-semibold">
+            {/* <span className="inline-flex self-start rounded-full border border-white/30 bg-white/20 backdrop-blur-md px-5 py-2 text-sm font-semibold">
 
               {form.badge || "Making a Difference Together"}
 
-            </span>
+            </span> */}
 
             {/* Title */}
 
@@ -103,7 +103,7 @@ const HeroPreview = ({ form, previewImage }) => {
 
             <div className="mt-10 flex flex-wrap gap-5">
 
-              <button
+              {/* <button
                 type="button"
                 className="flex items-center gap-2 rounded-xl bg-teal-500 px-7 py-3 font-semibold shadow-lg hover:bg-teal-600 transition"
               >
@@ -111,9 +111,9 @@ const HeroPreview = ({ form, previewImage }) => {
 
                 {form.donate_button_text || "Donate Now"}
 
-              </button>
+              </button> */}
 
-              <button
+              {/* <button
                 type="button"
                 className="flex items-center gap-2 rounded-xl border border-white px-7 py-3 font-semibold hover:bg-white hover:text-gray-900 transition"
               >
@@ -122,13 +122,13 @@ const HeroPreview = ({ form, previewImage }) => {
                 {form.valunteer_button_text ||
                   "Become a Volunteer"}
 
-              </button>
+              </button> */}
 
             </div>
 
             {/* Links */}
 
-            <div className="mt-12 rounded-xl bg-white/10 backdrop-blur-md p-5">
+            {/* <div className="mt-12 rounded-xl bg-white/10 backdrop-blur-md p-5">
 
               <h4 className="font-semibold mb-3">
                 Navigation Links
@@ -153,7 +153,7 @@ const HeroPreview = ({ form, previewImage }) => {
 
               </div>
 
-            </div>
+            </div> */}
 
           </div>
 

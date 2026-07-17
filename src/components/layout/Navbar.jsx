@@ -3,9 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { FaBars, FaTimes, FaSun, FaMoon, FaHeart, FaUser } from 'react-icons/fa'
-// import { GiHand } from 'react-icons/gi'
 import deena from "../../../public/dennabandu.png"
-
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,16 +41,19 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'glass shadow-card py-3'
-          : 'bg-transparent py-5'
+          : 'bg-gradient-to-b from-black/50 via-black/20 to-transparent py-5'
       }`}
     >
       <nav className="container-custom flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold">
-      
-            {/* <GiHand /> */}
-            <img src={deena} alt="DheenabandhuTrust" className="w-auto h-16 object-contain"/>
-    
-          <span className="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
+          <img src={deena} alt="DheenabandhuTrust" className="w-auto h-16 object-contain bg-transparent" />
+          <span
+            className={`${
+              isScrolled
+                ? 'bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent'
+                : 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
+            }`}
+          >
             DheenabandhuTrust
           </span>
         </Link>
@@ -63,17 +64,23 @@ const Navbar = () => {
             <Link
               key={link.to}
               to={link.to}
-              className={`relative text-sm font-medium transition-colors hover:text-primary-600 ${
-                location.pathname === link.to
-                  ? 'text-primary-600 dark:text-primary-400'
-                  : 'text-gray-700 dark:text-gray-300'
-              }`}
+              className={`relative text-sm font-medium transition-colors ${
+                isScrolled
+                  ? location.pathname === link.to
+                    ? 'text-primary-600 dark:text-primary-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600'
+                  : location.pathname === link.to
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-white'
+              } ${!isScrolled ? 'drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]' : ''}`}
             >
               {link.label}
               {location.pathname === link.to && (
                 <motion.div
                   layoutId="navbar-indicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600"
+                  className={`absolute -bottom-1 left-0 right-0 h-0.5 ${
+                    isScrolled ? 'bg-primary-600' : 'bg-white'
+                  }`}
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
@@ -82,14 +89,6 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          {/* <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {isDark ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-700" />}
-          </button> */}
-
           <Link
             to="/donate"
             className="hidden md:flex btn-primary gap-2 text-sm"
@@ -100,17 +99,33 @@ const Navbar = () => {
 
           <Link
             to="/dashboard"
-            className="hidden md:flex p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className={`hidden md:flex p-2 rounded-full transition-colors ${
+              isScrolled
+                ? 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                : 'hover:bg-white/10'
+            }`}
           >
-            <FaUser className="text-gray-700 dark:text-gray-300" />
+            <FaUser
+              className={
+                isScrolled
+                  ? 'text-gray-700 dark:text-gray-300'
+                  : 'text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]'
+              }
+            />
           </Link>
 
           <button
             onClick={toggleMenu}
-            className="lg:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className={`lg:hidden p-2 rounded-full transition-colors ${
+              isScrolled ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : 'hover:bg-white/10'
+            }`}
             aria-label="Toggle menu"
           >
-            {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            {isOpen ? (
+              <FaTimes size={20} className={isScrolled ? '' : 'text-white'} />
+            ) : (
+              <FaBars size={20} className={isScrolled ? '' : 'text-white'} />
+            )}
           </button>
         </div>
       </nav>
@@ -146,17 +161,11 @@ const Navbar = () => {
                 </motion.div>
               ))}
               <div className="pt-4 flex flex-col gap-3">
-                <Link
-                  to="/donate"
-                  className="btn-primary w-full justify-center gap-2"
-                >
+                <Link to="/donate" className="btn-primary w-full justify-center gap-2">
                   <FaHeart />
                   Donate Now
                 </Link>
-                <Link
-                  to="/dashboard"
-                  className="btn-secondary w-full justify-center gap-2"
-                >
+                <Link to="/dashboard" className="btn-secondary w-full justify-center gap-2">
                   <FaUser />
                   Dashboard
                 </Link>

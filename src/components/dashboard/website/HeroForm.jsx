@@ -38,7 +38,7 @@ const HeroForm = ({
 
         {/* Badge */}
 
-        <div>
+        {/* <div>
 
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Badge
@@ -53,7 +53,7 @@ const HeroForm = ({
             className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
           />
 
-        </div>
+        </div> */}
 
         {/* Title */}
 

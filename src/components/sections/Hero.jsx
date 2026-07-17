@@ -5,9 +5,10 @@ import { motion, useAnimation, useInView } from 'framer-motion'
 import { FaHeart, FaHandsHelping, FaArrowRight } from 'react-icons/fa'
 import { getHeroSection } from '../../services/heroService';
 // import heroData from '../../data/home.json'
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const Hero = () => {
-
+  const[loading,setLoading]=useState(true);
 
   useEffect(() => {
   loadHero();
@@ -17,6 +18,8 @@ const Hero = () => {
  const loadHero =async () =>{
   try {
     const data = await getHeroSection();
+    // console.log("API Response:", data);
+
     setHero({
       badge: data.badge || "",
       title: data.title || "",
@@ -31,6 +34,8 @@ const Hero = () => {
   }
   catch (error) {
     console.error("Failed to load hero section:", error);
+  } finally{
+    setLoading(false);
   }
   }
   
@@ -75,6 +80,9 @@ const Hero = () => {
     },
   }
 
+  // if (loading){
+  //   return <LoadingSpinner fullScreen/>
+  // }
   // const hero = heroData.hero
 //linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)),
   return (
@@ -97,21 +105,20 @@ const Hero = () => {
           className="max-w-4xl"
         >
           <motion.div variants={itemVariants} className="mb-6">
-            <span className="inline-block px-4 py-2 bg-primary-500/20 backdrop-blur-sm rounded-full text-primary-300 text-sm font-semibold border border-primary-400/30">
+            {/* <span className="inline-block px-4 py-2 bg-primary-500/20 backdrop-blur-sm rounded-full text-primary-300 text-sm font-semibold border border-primary-400/30">
               {hero.badge}
-            </span>
+            </span> */}
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold text-white leading-tight"
-          >
+                className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold text-white leading-tight break-words"          >
             {hero.title}
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed"
+            className="mt-11 font-bold text-base sm:text-lg md:text-xl text-white max-w-2xl leading-relaxed break-words"
           >
             {hero.description}
           </motion.p>
@@ -128,13 +135,14 @@ const Hero = () => {
               Donate Now
               <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Link> */}
-            <Link
+
+            {/* <Link
               to="/get-involved"
               className="btn-outline gap-3 text-base px-8 py-4"
             >
               <FaHandsHelping />
               Become Volunteer
-            </Link>
+            </Link> */}
           </motion.div>
 
           {/* Stats Cards */}
