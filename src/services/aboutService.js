@@ -5,12 +5,12 @@ export const getAboutSections = () => api.get("/about/");
 export const getAboutSection = (id) =>
   api.get(`/about/${id}/`);
 
-export const createAboutSection = (formData) =>
-  api.post("/about/", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+// export const createAboutSection = (formData) =>
+//   api.post("/about/", formData, {
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//   });
 
 export const updateAboutSection = (id, formData) =>
   api.put(`/about/${id}/`, formData, {
@@ -19,8 +19,8 @@ export const updateAboutSection = (id, formData) =>
     },
   });
 
-export const deleteAboutSection = (id) =>
-  api.delete(`/about/${id}/`);
+// export const deleteAboutSection = (id) =>
+//   api.delete(`/about/${id}/`);
 
 
 
