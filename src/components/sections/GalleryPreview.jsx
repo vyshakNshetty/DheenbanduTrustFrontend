@@ -36,9 +36,7 @@ const GalleryPreview = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider">
-            {homeData.galleryPreview.subtitle}
-          </span>
+          
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 text-dark dark:text-white">
             {homeData.galleryPreview.title}
           </h2>

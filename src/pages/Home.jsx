@@ -25,12 +25,12 @@ const Home = () => {
         <Hero />
         <Statistics />
         <AboutPreview />
-        <Programs />
         {/* <SuccessStories /> */}
-        <VolunteerCTA />
         {/* <Testimonials /> */}
         <GalleryPreview />
-        <Newsletter />
+        <Programs />
+        <VolunteerCTA />
+        {/* <Newsletter /> */}
       </Suspense>
     </>
   )

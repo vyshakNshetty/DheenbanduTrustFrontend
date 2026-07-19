@@ -88,9 +88,9 @@ const Activities = () => {
                   <h3 className="text-xl font-bold text-dark dark:text-white mb-2">
                     {activity.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                  {/* <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                     {activity.description}
-                  </p>
+                  </p> */}
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     {/* <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                       <FaCalendarAlt className="text-primary-500" />
@@ -108,10 +108,14 @@ const Activities = () => {
                       <FaClock className="text-primary-500" />
                       <span>{activity.status}</span>
                     </div> */}
-                    <div className="mt-6 flex justify-start">
+   <div className="mb-4">
+  <p className="text-gray-600 dark:text-gray-400 text-sm leading-7 line-clamp-3">
+    {activity.description}
+  </p>
+
   <button
     onClick={() => openActivity(activity)}
-    className="px-5 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition"
+    className="mt-2 text-primary-600 hover:text-primary-700 font-semibold"
   >
     Read More →
   </button>

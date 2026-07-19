@@ -18,7 +18,7 @@ const ActivityModal = () => {
             initial={{ scale: .8 }}
             animate={{ scale: 1 }}
             exit={{ scale: .8 }}
-            className="bg-white rounded-2xl max-w-5xl w-full overflow-hidden relative"
+            className="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative"
           >
                     <button
                     onClick={closeActivity}
@@ -27,7 +27,7 @@ const ActivityModal = () => {
                         <FaTimes className="text-gray-700" />
                     </button>
                     
-                    <img src={selectedActivity.image} alt={selectedActivity.title} className='w-full h-96 object-cover' />
+                    <img src={selectedActivity.image} alt={selectedActivity.title} className='w-full h-[300px] md:h-[500px] object-cover' />
                     <div className="p-8">
                         
               <span className="bg-primary-100 text-primary-600 px-4 py-1 rounded-full text-sm">
@@ -38,9 +38,9 @@ const ActivityModal = () => {
                 {selectedActivity.title}
               </h2>
 
-              <p className="mt-5 text-gray-600">
-                {selectedActivity.description}
-              </p>
+             <p className="mt-5 text-gray-700 leading-8 whitespace-pre-line text-justify">
+  {selectedActivity.description}
+</p>
 
               {/* <div className="grid md:grid-cols-2 gap-4 mt-8">
 
