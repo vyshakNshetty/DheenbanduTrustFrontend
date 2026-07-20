@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaArrowRight } from 'react-icons/fa'
-import homeData from '../../data/home.json'
+// import homeData from '../../data/home.json'
+import { galleryService } from '../../services/galleryService'
 
 const GalleryPreview = () => {
-  const images = homeData.galleryPreview.images
+  const [images,setImages]=useState([]);
+
+  useEffect(()=>{
+    loadGallery();
+  },[]);
+
+  const loadGallery=async()=>{
+    try {
+      const res= await galleryService.getImages();
+      setImages(res)
+    } catch (error) {
+      alert(error)
+      // console.error(error);
+      
+    }
+  }
+  // const images = homeData.galleryPreview.images
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -38,7 +55,7 @@ const GalleryPreview = () => {
         >
           
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 text-dark dark:text-white">
-            {homeData.galleryPreview.title}
+            Our Gallery
           </h2>
           <Link
             to="/gallery"
@@ -58,15 +75,15 @@ const GalleryPreview = () => {
         >
           {images.map((image, index) => (
             <motion.div
-              key={index}
+              key={index.id}
               variants={itemVariants}
               className={`relative overflow-hidden rounded-2xl ${
                 index === 0 ? 'col-span-2 row-span-2 h-96' : 'h-48'
               }`}
             >
               <img
-                src={image}
-                alt={`Gallery ${index + 1}`}
+                src={image.image}
+                alt={image.title}
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 loading="lazy"
               />
