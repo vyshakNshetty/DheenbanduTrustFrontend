@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaArrowRight } from 'react-icons/fa'
-// import homeData from '../../data/home.json'
 import { galleryService } from '../../services/galleryService'
 
 const GalleryPreview = () => {
@@ -18,11 +17,10 @@ const GalleryPreview = () => {
       setImages(res)
     } catch (error) {
       alert(error)
-      // console.error(error);
+      console.error(error);
       
     }
   }
-  // const images = homeData.galleryPreview.images
 
   const containerVariants = {
     hidden: { opacity: 0 },

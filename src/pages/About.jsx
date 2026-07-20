@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaUserCircle } from "react-icons/fa";
 
 import {  AnimatePresence } from "framer-motion";
 
@@ -184,11 +184,16 @@ const About = () => {
                 whileHover={{ y: -8 }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-center px-8 py-10"
               >
-                <img
+                <div className="w-24 h-24 rounded-full border-4  bg-white flex items-center justify-center overflow-hidden mx-auto">
+
+                {data.image ?(<img
                   src={member.image}
                   alt={member.name}
                   className="w-32 h-32 rounded-full object-cover mx-auto mb-6 border-4 border-primary-100"
-                />
+                />):(
+                  <FaUserCircle className="text-gray-400  text-7xl"/>
+                )}
+                </div>
 
                 <h3 className="text-2xl font-bold text-dark">{member.name}</h3>
 

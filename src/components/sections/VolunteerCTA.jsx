@@ -31,9 +31,7 @@ const VolunteerCTA = () => {
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-semibold mb-4">
-                {data.subtitle}
-              </span>
+              
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
                 {data.title}
               </h2>
