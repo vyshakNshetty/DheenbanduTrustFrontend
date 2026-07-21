@@ -1,23 +1,36 @@
-import { api } from './api'
+import { api } from "./api";
 
 export const activityService = {
-  createActivity: async (activityData) => {
-    return api.post('/activities', activityData)
-  },
-
+  // Get all activities
   getActivities: async () => {
-    return api.get('/activities')
+    return await api.get("/activities/");
   },
 
+  // Create activity
+  createActivity: async (activityData) => {
+    return await api.post("/activities/create/", activityData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
+
+  // Get single activity
   getActivityById: async (id) => {
-    return api.get(`/activities/${id}`)
+    return await api.get(`/activities/${id}/`);
   },
 
+  // Update activity
   updateActivity: async (id, activityData) => {
-    return api.put(`/activities/${id}`, activityData)
+    return await api.put(`/activities/${id}/`, activityData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 
+  // Delete activity
   deleteActivity: async (id) => {
-    return api.delete(`/activities/${id}`)
+    return await api.delete(`/activities/${id}/`);
   },
-}
+};

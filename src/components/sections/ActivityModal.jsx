@@ -18,7 +18,7 @@ const ActivityModal = () => {
             initial={{ scale: .8 }}
             animate={{ scale: 1 }}
             exit={{ scale: .8 }}
-            className="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative"
+            className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative"
           >
                     <button
                     onClick={closeActivity}

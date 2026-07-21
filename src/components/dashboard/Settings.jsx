@@ -75,7 +75,7 @@ const Settings = () => {
               <FaPalette className="text-primary-500" />
               Preferences
             </h2>
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-medium text-dark dark:text-white">Dark Mode</p>
@@ -129,7 +129,7 @@ const Settings = () => {
                   <option value="fr">French</option>
                 </select>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Security */}

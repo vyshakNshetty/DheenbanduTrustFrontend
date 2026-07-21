@@ -54,7 +54,7 @@ const Navbar = () => {
                 : 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]'
             }`}
           >
-            DheenabandhuTrust
+            Deenabandhu Trust
           </span>
         </Link>
 
