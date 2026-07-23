@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaGraduationCap, FaHeartbeat, FaLeaf, FaFemale } from 'react-icons/fa'
-import homeData from '../../data/home.json'
+// import homeData from '../../data/home.json'
+import { activityService } from '../../services/activityService'
 
 const iconMap = {
   FaGraduationCap: FaGraduationCap,
@@ -12,7 +13,24 @@ const iconMap = {
 
 const Programs = () => {
   const [hoveredId, setHoveredId] = useState(null)
-  const programs = homeData.programs.items
+  // const programs = homeData.programs.items
+  const [programs,setProgram]=useState([]);
+
+
+  useEffect(()=>{
+    loadOurdonor();
+  },[])
+
+
+  const loadOurdonor = async()=>{
+    try {
+      const res = await activityService.getOurdonor();
+      setProgram(res)
+    } catch (error) {
+      console.error(error)
+      
+    }
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,15 +61,12 @@ const Programs = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider">
-            {homeData.programs.subtitle}
-          </span>
+        
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 text-dark dark:text-white">
-            {homeData.programs.title}
+            Our donors
           </h2>
           <p className="mt-4 text-gray-600 dark:text-gray-400 text-lg">
-            {homeData.programs.description}
-          </p>
+We sincerely thank our donors for their generous support in helping us empower children, strengthen communities, and create lasting positive change.          </p>
         </motion.div>
 
         <motion.div
@@ -77,17 +92,17 @@ const Programs = () => {
                   <img
                     src={program.image}
                     alt={program.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="rounded-2xl shadow-xl w-full h-[250px] object-cover"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/40 to-transparent" />
                   <div className="absolute bottom-4 left-4 flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary-500/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-white">
+                    {/* <div className="w-10 h-10 bg-primary-500/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-white">
                       {Icon && <Icon className="text-xl" />}
-                    </div>
-                    <span className="text-white font-semibold text-sm bg-dark/50 backdrop-blur-sm px-3 py-1 rounded-full">
+                    </div> */}
+                    {/* <span className="text-white font-semibold text-sm bg-dark/50 backdrop-blur-sm px-3 py-1 rounded-full">
                       {program.impact}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
 
@@ -95,9 +110,9 @@ const Programs = () => {
                   <h3 className="text-xl font-bold text-dark dark:text-white mb-2">
                     {program.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {/* <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                     {program.description}
-                  </p>
+                  </p> */}
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: isHovered ? '100%' : '0%' }}

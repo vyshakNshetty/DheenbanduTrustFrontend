@@ -8,6 +8,7 @@ const Overview = lazy(() => import('../components/dashboard/Overview'))
 const Donations = lazy(() => import('../components/dashboard/Donations'))
 const Volunteers = lazy(() => import('../components/dashboard/Volunteers'))
 const Activities = lazy(() => import('../components/dashboard/Activities/Activities'))
+const Ourdonor = lazy(() => import('../components/dashboard/Ourdonors/OurDonors'))
 const Gallery = lazy(() => import('../components/dashboard/Gallery'))
 const Aboutus = lazy(() => import('../components/dashboard/About/AboutDasboard'))
 const Settings = lazy(() => import('../components/dashboard/Settings'))
@@ -27,6 +28,7 @@ const Dashboard = () => {
             <Route path="donations" element={<Donations />} />
             <Route path="volunteers" element={<Volunteers />} />
             <Route path="activities" element={<Activities />} />
+            <Route path="ourdonor" element={<Ourdonor />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="about" element={<Aboutus />} />
             <Route path="settings" element={<Settings />} />

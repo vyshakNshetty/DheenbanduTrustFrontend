@@ -6,6 +6,8 @@ export const activityService = {
     return await api.get("/activities/");
   },
 
+ 
+
   // Create activity
   createActivity: async (activityData) => {
     return await api.post("/activities/create/", activityData, {
@@ -14,6 +16,7 @@ export const activityService = {
       },
     });
   },
+ 
 
   // Get single activity
   getActivityById: async (id) => {
@@ -32,5 +35,40 @@ export const activityService = {
   // Delete activity
   deleteActivity: async (id) => {
     return await api.delete(`/activities/${id}/`);
+  },
+
+  // --------------------------------------------------------------------
+
+   getOurdonor: async ()=>{
+    return await api.get("/ourdonor/");
+  },
+
+  // create Ourdonor
+   createOurdonor: async (ourdonorData) => {
+    return await api.post("/ourdonor/create/", ourdonorData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
+
+  // get single Ourdonor
+  getOurdonorById: async (id) => {
+    return await api.get(`/ourdonor/${id}/`);
+  },
+
+
+  // update Ourdonor
+  updateOurdonor: async (id, ourdonorData) => {
+    return await api.put(`/ourdonor/${id}/`, ourdonorData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
+
+  // Delete activity
+  deleteOurdonor: async (id) => {
+    return await api.delete(`/ourdonor/${id}/`);
   },
 };

@@ -27,8 +27,8 @@ const Home = () => {
         <AboutPreview />
         {/* <SuccessStories /> */}
         {/* <Testimonials /> */}
-        <GalleryPreview />
         <Programs />
+        <GalleryPreview />
         <VolunteerCTA />
         {/* <Newsletter /> */}
       </Suspense>
