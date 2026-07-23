@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import contactData from '../data/contact.json'
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaPaperPlane } from 'react-icons/fa'
 import { useToast } from '../context/ToastContext'
+import { sendContactMessage } from '../services/aboutService'
 
 const Contact = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -14,11 +15,14 @@ const Contact = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true)
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      showToast('Your message has been sent successfully! We\'ll get back to you soon.', 'success')
+      data.email = data.email.toLowerCase();
+      const res = await sendContactMessage(data);
+      // console.log("Response:", res);
+
+      showToast(res.message ||'Your message has been sent successfully! We\'ll get back to you soon.', 'success')
       reset()
     } catch (error) {
-      showToast('Something went wrong. Please try again.', 'error')
+      showToast(  error.message || 'Something went wrong. Please try again.', "error")
     } finally {
       setIsSubmitting(false)
     }
@@ -117,28 +121,29 @@ const Contact = () => {
                   <label className="label-field">Full Name</label>
                   <input
                     type="text"
-                    {...register('name', { required: 'Name is required' })}
+                    {...register("full_name", { required: 'Name is required' })}
                     className="input-field"
                     placeholder="John Doe"
                   />
-                  {errors.name && (
-                    <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
+                  {errors.full_name && (
+                    <p className="mt-1 text-sm text-red-500">{errors.full_name.message}</p>
                   )}
                 </div>
                 <div>
                   <label className="label-field">Email Address</label>
-                  <input
-                    type="email"
-                    {...register('email', {
-                      required: 'Email is required',
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Invalid email address',
-                      },
-                    })}
-                    className="input-field"
-                    placeholder="john@example.com"
-                  />
+               <input
+  type="email"
+  {...register("email", {
+    required: "Email is required",
+    setValueAs: (value) => value.toLowerCase(),
+    pattern: {
+      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+      message: "Invalid email address",
+    },
+  })}
+  className="input-field"
+  placeholder="john@example.com"
+/>
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
                   )}

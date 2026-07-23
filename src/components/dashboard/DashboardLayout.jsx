@@ -3,7 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   FaHome, FaHeart, FaUsers, FaCalendarAlt, FaImages,
-  FaCog, FaBars, FaTimes, FaSignOutAlt, FaImage
+  FaCog, FaBars, FaTimes, FaSignOutAlt, FaImage,
+  FaUber,
+  FaInfo,
+  FaProjectDiagram,
+  FaDonate
 } from 'react-icons/fa'
 
 const DashboardLayout = ({ children }) => {
@@ -14,11 +18,12 @@ const DashboardLayout = ({ children }) => {
     { to: '/dashboard', icon: FaHome, label: 'Overview' },
     { to: '/dashboard/hero-section', icon: FaImage, label: 'Hero Section' },
     { to: '/dashboard/donations', icon: FaHeart, label: 'Donations' },
-    { to: '/dashboard/volunteers', icon: FaUsers, label: 'Volunteers' },
+    // { to: '/dashboard/volunteers', icon: FaUsers, label: 'Volunteers' },
     { to: '/dashboard/activities', icon: FaCalendarAlt, label: 'Activities' },
     { to: '/dashboard/gallery', icon: FaImages, label: 'Gallery' },
-    { to: '/dashboard/ourdonor', icon: FaImages, label: 'Our donors' },
-    { to: '/dashboard/about', icon: FaCog, label: 'About us' },
+    { to: '/dashboard/ourdonor', icon: FaDonate, label: 'Our donors' },
+    { to: '/dashboard/about', icon: FaInfo, label: 'About us' },
+    { to: '/dashboard/contact', icon: FaUsers, label: 'Constact us' },
     { to: '/dashboard/settings', icon: FaCog, label: 'Settings' },
   ]
 

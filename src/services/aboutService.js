@@ -51,3 +51,8 @@ export const updateTeamMember = (id, formData) =>
 export const deleteTeamMember = (id) =>
   api.delete(`/team/${id}/`);
 
+
+export const getContactMessages = () => api.get("/contact/");
+
+export const sendContactMessage = (data) =>
+  api.post("/contact/", data);

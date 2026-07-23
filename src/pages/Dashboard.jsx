@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import DashboardLayout from '../components/dashboard/DashboardLayout'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 
+
 const Overview = lazy(() => import('../components/dashboard/Overview'))
 const Donations = lazy(() => import('../components/dashboard/Donations'))
 const Volunteers = lazy(() => import('../components/dashboard/Volunteers'))
@@ -11,6 +12,7 @@ const Activities = lazy(() => import('../components/dashboard/Activities/Activit
 const Ourdonor = lazy(() => import('../components/dashboard/Ourdonors/OurDonors'))
 const Gallery = lazy(() => import('../components/dashboard/Gallery'))
 const Aboutus = lazy(() => import('../components/dashboard/About/AboutDasboard'))
+const DashboardContact = lazy(() => import('../components/dashboard/DashboardContact'))
 const Settings = lazy(() => import('../components/dashboard/Settings'))
 const HeroSection = lazy(() => import('../components/dashboard/website/HeroSection'))
 
@@ -31,6 +33,7 @@ const Dashboard = () => {
             <Route path="ourdonor" element={<Ourdonor />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="about" element={<Aboutus />} />
+            <Route path="contact" element={<DashboardContact />} />
             <Route path="settings" element={<Settings />} />
             <Route path="hero-section" element={<HeroSection />} />
           </Routes>

@@ -78,9 +78,9 @@ const OurDonorForm = ({ donor = null, onClose, onSuccess }) => {
       setSaving(true);
 
       if (donor) {
-        await ourDonorService.updateOurDonor(donor.id, data);
+        await activityService.updateOurdonor(donor.id, data);
       } else {
-        await ourDonorService.createOurDonor(data);
+        await activityService.createOurDonor(data);
       }
 
       if (onSuccess) {
@@ -149,7 +149,7 @@ const OurDonorForm = ({ donor = null, onClose, onSuccess }) => {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  required
+                  // required
                 />
               </div>
 
