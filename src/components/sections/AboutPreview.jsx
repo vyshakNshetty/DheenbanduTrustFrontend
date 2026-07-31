@@ -1,13 +1,34 @@
-import React ,{ useState} from 'react'
+import React ,{ useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaCheckCircle, FaArrowRight } from 'react-icons/fa'
-import homeData from '../../data/home.json'
+// import homeData from '../../data/home.json'
+import { getAboutPreview } from'../../services/aboutService';
 
 const AboutPreview = () => {
-  const data = homeData.aboutPreview
+  // const data = homeData.aboutPreview
+  const [data, setData] = useState({
+  title: "",
+  short_description: "",
+  full_description: "",
+  youtube_url: "",
+  highlights: [],
+});
   const [open, setOpen] = useState(false)
 
+
+  useEffect(()=>{
+    loadaboutPre();
+  },[])
+
+  const loadaboutPre =async()=>{
+      try {
+        const res = await getAboutPreview();
+        setData(res);
+      } catch (error) {
+        console.error(error)
+      }
+  }
   return (
     <>
     <section className="section-padding">
@@ -23,10 +44,10 @@ const AboutPreview = () => {
               {data.subtitle}
             </span> */}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 text-dark dark:text-white">
-              {data.title}
+              About us
             </h2>
             <p className="mt-6 text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-              {data.shortDescription}
+              {data.short_description}
             </p>
 
 <button
@@ -37,17 +58,17 @@ const AboutPreview = () => {
   <FaArrowRight className="inline-block ml-1 transition-transform group-hover:translate-x-1" />
 </button>
             <ul className="mt-8 space-y-3">
-              {data.highlights.slice(0, 4).map((highlight, index) => (
+              {data.highlights.slice(0, 4).map((highlight) => (
                 <motion.li
-                  key={index}
+                  key={highlight.order}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: highlight.order * 0.1 }}
                   viewport={{ once: true }}
                   className="flex items-center gap-3 text-gray-700 dark:text-gray-300"
                 >
                   <FaCheckCircle className="text-primary-500 flex-shrink-0" />
-                  <span>{highlight}</span>
+                  <span>{highlight.title}</span>
                 </motion.li>
               ))}
             </ul>
@@ -71,7 +92,7 @@ const AboutPreview = () => {
   <div className="relative rounded-2xl overflow-hidden shadow-card-hover aspect-video">
     <iframe
       className="w-full h-full"
-      src="https://www.youtube.com/embed/_k62nGcF7wk"
+      src={data.youtube_url}
       title="About Deenabandhu Trust"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
@@ -100,7 +121,7 @@ const AboutPreview = () => {
       <div className="p-8 md:p-12">
 
         <h2 className="text-4xl font-bold mb-4">
-          {data.title}
+          About us
         </h2>
 
        
@@ -108,16 +129,16 @@ const AboutPreview = () => {
 
         <div className="space-y-6">
 
-          {data.paragraphs.map((paragraph, index) => (
+         
 
             <p
-              key={index}
+              
               className="text-gray-700 dark:text-gray-300 leading-8 text-lg"
             >
-              {paragraph}
+              {data.full_description}
             </p>
 
-          ))}
+          
 
         </div>
 
@@ -131,17 +152,17 @@ const AboutPreview = () => {
 
           <div className="grid md:grid-cols-2 gap-5">
 
-            {data.highlights.map((item, index) => (
+            {data.highlights.map((item) => (
 
               <div
-                key={index}
+                key={item.order}
                 className="flex items-start gap-3"
               >
 
                 <FaCheckCircle className="text-primary-600 mt-1" />
 
                 <span className="text-gray-700 dark:text-gray-300">
-                  {item}
+                  {item.title}
                 </span>
 
               </div>

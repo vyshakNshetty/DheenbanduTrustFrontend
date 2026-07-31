@@ -1,4 +1,4 @@
-export const APP_NAME = 'HopeBridge'
+export const APP_NAME = 'Deenabandhu Trust'
 export const APP_DESCRIPTION = 'Empowering Communities, Transforming Lives'
 
 export const NAV_LINKS = [

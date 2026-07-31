@@ -1,19 +1,20 @@
-import { api } from './api'
+import { api } from "./api";
 
 export const donationService = {
-  createDonation: async (donationData) => {
-    return api.post('/donations', donationData)
+  // Get donation details
+  getDonation: async () => {
+    return await api.get("/donation/");
   },
 
-  getDonations: async () => {
-    return api.get('/donations')
-  },
+  
+ 
 
-  getDonationStats: async () => {
-    return api.get('/donations/stats')
+  // Update donation details
+  updateDonation: async (donationData) => {
+    return await api.put("/donation/", donationData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
-
-  processPayment: async (paymentData) => {
-    return api.post('/payments', paymentData)
-  },
-}
+};

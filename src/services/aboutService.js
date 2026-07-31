@@ -1,5 +1,17 @@
 import { api } from "./api";
 
+export const getAboutPreview = () => api.get("/about/preview/");
+
+export const createAboutPreview = (data) =>
+  api.post("/about/preview/", data);
+
+export const updateAboutPreview = (data) =>
+  api.put("/about/preview/", data);
+
+export const patchAboutPreview = (data) =>
+  api.patch("/about/preview/", data);
+
+// -----------------------------------------------------------------------------------------
 export const getAboutSections = () => api.get("/about/");
 
 export const getAboutSection = (id) =>

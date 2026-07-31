@@ -22,6 +22,7 @@ const DashboardLayout = ({ children }) => {
     { to: '/dashboard/activities', icon: FaCalendarAlt, label: 'Activities' },
     { to: '/dashboard/gallery', icon: FaImages, label: 'Gallery' },
     { to: '/dashboard/ourdonor', icon: FaDonate, label: 'Our donors' },
+    { to: '/dashboard/about-preview', icon: FaInfo, label: 'About Preview' },
     { to: '/dashboard/about', icon: FaInfo, label: 'About us' },
     { to: '/dashboard/contact', icon: FaUsers, label: 'Constact us' },
     { to: '/dashboard/settings', icon: FaCog, label: 'Settings' },

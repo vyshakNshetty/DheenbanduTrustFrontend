@@ -15,6 +15,7 @@ const Aboutus = lazy(() => import('../components/dashboard/About/AboutDasboard')
 const DashboardContact = lazy(() => import('../components/dashboard/DashboardContact'))
 const Settings = lazy(() => import('../components/dashboard/Settings'))
 const HeroSection = lazy(() => import('../components/dashboard/website/HeroSection'))
+const AboutPreview = lazy(() =>import('../components/dashboard/AboutPreview/AboutPreview'));
 
 const Dashboard = () => {
   return (
@@ -33,6 +34,7 @@ const Dashboard = () => {
             <Route path="ourdonor" element={<Ourdonor />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="about" element={<Aboutus />} />
+            <Route path="about-preview" element={<AboutPreview />} />
             <Route path="contact" element={<DashboardContact />} />
             <Route path="settings" element={<Settings />} />
             <Route path="hero-section" element={<HeroSection />} />

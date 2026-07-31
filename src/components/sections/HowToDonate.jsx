@@ -10,15 +10,34 @@ import {
 } from "react-icons/fa";
 import donateData from "../../data/donate.json";
 import { useToast } from "../../context/ToastContext";
+import { useEffect, useState } from "react";
+import { donationService } from "../../services/donationService";
 
 const HowToDonate = () => {
   const { showToast } = useToast();
+  const [donation, setDonation] = useState(null);
+
+  useEffect(() => {
+  const loadDonation = async () => {
+    try {
+      const response = await donationService.getDonation();
+      setDonation(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  loadDonation();
+}, []);
 
   const copyAccountNumber = () => {
     navigator.clipboard.writeText(donateData.india.accountNumber);
     showToast("Account number copied successfully!", "success");
   };
 
+if (!donation) {
+  return <div>Loading...</div>;
+}
   return (
     <section className="py-20 bg-slate-50 dark:bg-slate-900">
 
@@ -87,12 +106,12 @@ here is our local account details: */}
 
               <InfoRow
                 label="Account Name"
-                value={donateData.india.accountName}
+                value={donation.account_name}
               />
 
               <InfoRow
                 label="Bank Name"
-                value={donateData.india.bankName}
+                value={donation.bank_name}
               />
 
               <div className="flex justify-between items-center border-b pb-3">
@@ -104,7 +123,7 @@ here is our local account details: */}
                   </p>
 
                   <h4 className="font-semibold text-lg">
-                    {donateData.india.accountNumber}
+                    {donation.account_number}
                   </h4>
 
                 </div>
@@ -121,17 +140,17 @@ here is our local account details: */}
 
               <InfoRow
                 label="IFSC"
-                value={donateData.india.ifsc}
+                value={donation.ifsc}
               />
 
               <InfoRow
                 label="MICR"
-                value={donateData.india.micr}
+                value={donation.micr}
               />
 
               <InfoRow
                 label="Branch"
-                value={donateData.india.branch}
+                value={donation.branch}
               />
 
             </div>
@@ -165,7 +184,7 @@ here is our local account details: */}
             <div className="mt-8">
 
               <img
-                src={donateData.upi.qrImage}
+                src={donation.qr_code}
                 alt="QR Code"
                 className="w-72 mx-auto rounded-2xl shadow-lg border bg-white p-4 hover:scale-105 transition duration-300"
               />

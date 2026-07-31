@@ -67,66 +67,53 @@ const DashboardContact = () => {
       <div className="bg-white rounded-xl shadow overflow-hidden">
 
         <table className="w-full">
+  <thead className="bg-gray-100">
+    <tr>
+      <th className="px-4 py-3 text-left">Name</th>
+      <th className="px-4 py-3 text-left">Email</th>
+      <th className="px-4 py-3 text-left">Subject</th>
+      <th className="px-4 py-3 text-left">Date</th>
+      <th className="px-4 py-3 text-center">Action</th>
+    </tr>
+  </thead>
 
-          <thead className="bg-gray-100">
+  <tbody>
+    {filteredMessages.map((item) => (
+      <tr
+        key={item.id}
+        className="border-b hover:bg-gray-50"
+      >
+        <td className="px-4 py-4">{item.full_name}</td>
 
-            <tr>
-              <th className="p-4 text-left">Name</th>
-              <th>Email</th>
-              <th>Subject</th>
-              <th>Date</th>
-              <th className="text-center">Action</th>
-            </tr>
+        <td className="px-4 py-4">{item.email}</td>
 
-          </thead>
+        <td className="px-4 py-4">{item.subject}</td>
 
-          <tbody>
+        <td className="px-4 py-4">
+          {new Date(item.created_at).toLocaleDateString()}
+        </td>
 
-            {filteredMessages.map((item) => (
+        <td className="px-4 py-4">
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => setSelectedMessage(item)}
+              className="text-blue-600 hover:text-blue-800"
+            >
+              <FaEye />
+            </button>
 
-              <tr
-                key={item.id}
-                className="border-b hover:bg-gray-50"
-              >
-                <td className="p-4">{item.full_name}</td>
-
-                <td>{item.email}</td>
-
-                <td>{item.subject}</td>
-
-                <td>
-                  {new Date(item.created_at).toLocaleDateString()}
-                </td>
-
-                <td>
-
-                  <div className="flex justify-center gap-3">
-
-                    <button
-                      onClick={() => setSelectedMessage(item)}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      <FaEye />
-                    </button>
-
-                    <button
-                      onClick={() => handleDelete(item.id)}
-                      className="text-red-600 hover:text-red-800"
-                    >
-                      <FaTrash />
-                    </button>
-
-                  </div>
-
-                </td>
-
-              </tr>
-
-            ))}
-
-          </tbody>
-
-        </table>
+            {/* <button
+              onClick={() => handleDelete(item.id)}
+              className="text-red-600 hover:text-red-800"
+            >
+              <FaTrash />
+            </button> */}
+          </div>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
       </div>
 

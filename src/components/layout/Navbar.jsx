@@ -16,7 +16,7 @@ const Navbar = () => {
     { to: '/about', label: 'About' },
     { to: '/activities', label: 'Activities' },
     { to: '/gallery', label: 'Gallery' },
-    { to: '/get-involved', label: 'Get Involved' },
+    // { to: '/get-involved', label: 'Get Involved' },
     { to: '/contact', label: 'Contact' },
   ], [])
 

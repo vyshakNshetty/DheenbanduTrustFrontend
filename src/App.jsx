@@ -38,7 +38,7 @@ function App() {
                     <Route path="about" element={<About />} />
                     <Route path="activities" element={<Activities />} />
                     <Route path="gallery" element={<Gallery />} />
-                    <Route path="get-involved" element={<GetInvolved />} />
+                    {/* <Route path="get-involved" element={<GetInvolved />} /> */}
                     <Route path="donate" element={<Donate />} />
                     <Route path="contact" element={<Contact />} />
                     <Route path="dashboard/*" element={<Dashboard />} />
