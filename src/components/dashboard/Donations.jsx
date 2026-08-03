@@ -1,168 +1,236 @@
-import React, { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
-import { FaSearch, FaFilter, FaDownload } from 'react-icons/fa'
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FaUniversity,
+  FaSave,
+  FaUpload,
+} from "react-icons/fa";
+
+import { getDonation, updateDonation } from "../../services/donationService";
 
 const Donations = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filter, setFilter] = useState('all')
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  const donations = useMemo(() => [
-    { id: 1, donor: 'John Smith', amount: 500, date: '2026-06-15', status: 'completed', type: 'one-time' },
-    { id: 2, donor: 'Sarah Johnson', amount: 250, date: '2026-06-14', status: 'completed', type: 'monthly' },
-    { id: 3, donor: 'Michael Chen', amount: 1000, date: '2026-06-13', status: 'pending', type: 'one-time' },
-    { id: 4, donor: 'Emily Rodriguez', amount: 75, date: '2026-06-12', status: 'completed', type: 'one-time' },
-    { id: 5, donor: 'David Kim', amount: 200, date: '2026-06-11', status: 'completed', type: 'monthly' },
-    { id: 6, donor: 'Lisa Thompson', amount: 150, date: '2026-06-10', status: 'pending', type: 'one-time' },
-    { id: 7, donor: 'James Wilson', amount: 300, date: '2026-06-09', status: 'completed', type: 'monthly' },
-    { id: 8, donor: 'Maria Santos', amount: 50, date: '2026-06-08', status: 'completed', type: 'one-time' },
-  ], [])
+  const [form, setForm] = useState({
+    account_name: "",
+    bank_name: "",
+    account_number: "",
+    ifsc: "",
+    micr: "",
+    branch: "",
+  });
 
-  const filteredDonations = useMemo(() => {
-    let result = donations
-    if (filter !== 'all') {
-      result = result.filter(d => d.type === filter)
-    }
-    if (searchTerm) {
-      result = result.filter(d => 
-        d.donor.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    }
-    return result
-  }, [donations, filter, searchTerm])
+  const [qrPreview, setQrPreview] = useState("");
+  const [qrFile, setQrFile] = useState(null);
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'completed': return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-      case 'pending': return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
-      default: return 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400'
+  useEffect(() => {
+    fetchDonation();
+  }, []);
+
+  const fetchDonation = async () => {
+    try {
+      const res = await getDonation();
+
+      setForm({
+        account_name: res.account_name || "",
+        bank_name: res.bank_name || "",
+        account_number: res.account_number || "",
+        ifsc: res.ifsc || "",
+        micr: res.micr || "",
+        branch: res.branch || "",
+      });
+
+      setQrPreview(res.qr_code);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setQrFile(file);
+    setQrPreview(URL.createObjectURL(file));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setSaving(true);
+
+   try {
+  const formData = new FormData();
+
+  Object.entries(form).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
+
+  if (qrFile) {
+    formData.append("qr_code", qrFile);
+  }
+
+  const response = await updateDonation(formData);
+
+  alert("Donation details updated successfully.");
+
+  // Refresh the latest data from the server
+  fetchDonation();
+
+} catch (err) {
+  console.error(err);
+  alert("Update failed");
+} finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center py-20 text-gray-500">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          <h1 className="text-3xl font-bold text-dark dark:text-white">
-            Donations
-          </h1>
-          <button className="btn-primary gap-2">
-            <FaDownload />
-            Export Report
-          </button>
-        </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <h1 className="text-3xl font-bold mb-8 flex items-center gap-3">
+        <FaUniversity />
+        Donation Details
+      </h1>
 
-        {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="relative flex-1">
-            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+      <form
+        onSubmit={handleSubmit}
+        className="grid lg:grid-cols-3 gap-8"
+      >
+        <div className="lg:col-span-2 card p-6 space-y-5">
+
+          <div>
+            <label className="font-medium">Account Name</label>
             <input
-              type="text"
-              placeholder="Search donations..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="input-field pl-10"
+              name="account_name"
+              value={form.account_name}
+              onChange={handleChange}
+              className="input-field mt-2"
             />
           </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                filter === 'all'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 dark:bg-dark/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark/70'
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setFilter('one-time')}
-              className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                filter === 'one-time'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 dark:bg-dark/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark/70'
-              }`}
-            >
-              One-time
-            </button>
-            <button
-              onClick={() => setFilter('monthly')}
-              className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                filter === 'monthly'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 dark:bg-dark/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark/70'
-              }`}
-            >
-              Monthly
-            </button>
-          </div>
-        </div>
 
-        {/* Table */}
-        <div className="card overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 dark:bg-dark/50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Donor
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Amount
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Date
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Type
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                {filteredDonations.map((donation) => (
-                  <motion.tr
-                    key={donation.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
-                  >
-                    <td className="px-6 py-4 text-sm font-medium text-dark dark:text-white">
-                      {donation.donor}
-                    </td>
-                    <td className="px-6 py-4 text-sm font-semibold text-primary-600 dark:text-primary-400">
-                      ${donation.amount}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
-                      {donation.date}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-400 capitalize">
-                      {donation.type}
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(donation.status)}`}>
-                        {donation.status}
-                      </span>
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
+          <div>
+            <label className="font-medium">Bank Name</label>
+            <input
+              name="bank_name"
+              value={form.bank_name}
+              onChange={handleChange}
+              className="input-field mt-2"
+            />
           </div>
-          {filteredDonations.length === 0 && (
-            <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-              No donations found
+
+          <div>
+            <label className="font-medium">Account Number</label>
+            <input
+              name="account_number"
+              value={form.account_number}
+              onChange={handleChange}
+              className="input-field mt-2"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            <div>
+              <label className="font-medium">IFSC</label>
+              <input
+                name="ifsc"
+                value={form.ifsc}
+                onChange={handleChange}
+                className="input-field mt-2"
+              />
             </div>
-          )}
-        </div>
-      </motion.div>
-    </div>
-  )
-}
 
-export default Donations
+            <div>
+              <label className="font-medium">MICR</label>
+              <input
+                name="micr"
+                value={form.micr}
+                onChange={handleChange}
+                className="input-field mt-2"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-medium">Branch</label>
+            <input
+              name="branch"
+              value={form.branch}
+              onChange={handleChange}
+              className="input-field mt-2"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={saving}
+            className="btn-primary flex items-center gap-2"
+          >
+            <FaSave />
+            {saving ? "Saving..." : "Save Changes"}
+          </button>
+
+        </div>
+
+        <div className="card p-6">
+
+          <h2 className="text-xl font-semibold mb-5">
+            QR Code
+          </h2>
+
+          <div className="border rounded-xl overflow-hidden">
+
+            {qrPreview ? (
+              <img
+                src={qrPreview}
+                alt="QR"
+                className="w-full h-72 object-contain"
+              />
+            ) : (
+              <div className="h-72 flex items-center justify-center text-gray-400">
+                No QR Code
+              </div>
+            )}
+
+          </div>
+
+          <label className="btn-secondary mt-5 w-full flex justify-center items-center gap-2 cursor-pointer">
+            <FaUpload />
+            Upload QR Code
+
+            <input
+              type="file"
+              hidden
+              accept="image/*"
+              onChange={handleImage}
+            />
+          </label>
+
+        </div>
+      </form>
+    </motion.div>
+  );
+};
+
+export default Donations;

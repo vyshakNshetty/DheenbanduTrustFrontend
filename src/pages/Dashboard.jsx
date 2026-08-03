@@ -7,7 +7,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner'
 
 const Overview = lazy(() => import('../components/dashboard/Overview'))
 const Donations = lazy(() => import('../components/dashboard/Donations'))
-const Volunteers = lazy(() => import('../components/dashboard/Volunteers'))
+// const Volunteers = lazy(() => import('../components/dashboard/Volunteers'))
 const Activities = lazy(() => import('../components/dashboard/Activities/Activities'))
 const Ourdonor = lazy(() => import('../components/dashboard/Ourdonors/OurDonors'))
 const Gallery = lazy(() => import('../components/dashboard/Gallery'))
@@ -29,7 +29,7 @@ const Dashboard = () => {
           <Routes>
             <Route index element={<Overview />} />
             <Route path="donations" element={<Donations />} />
-            <Route path="volunteers" element={<Volunteers />} />
+            {/* <Route path="volunteers" element={<Volunteers />} /> */}
             <Route path="activities" element={<Activities />} />
             <Route path="ourdonor" element={<Ourdonor />} />
             <Route path="gallery" element={<Gallery />} />

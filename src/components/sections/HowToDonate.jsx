@@ -11,7 +11,7 @@ import {
 import donateData from "../../data/donate.json";
 import { useToast } from "../../context/ToastContext";
 import { useEffect, useState } from "react";
-import { donationService } from "../../services/donationService";
+import { getDonation } from "../../services/donationService";
 
 const HowToDonate = () => {
   const { showToast } = useToast();
@@ -20,7 +20,7 @@ const HowToDonate = () => {
   useEffect(() => {
   const loadDonation = async () => {
     try {
-      const response = await donationService.getDonation();
+      const response = await getDonation();
       setDonation(response);
     } catch (error) {
       console.error(error);
@@ -241,7 +241,7 @@ here is our local account details: */}
             </div>
 
             <a
-              href={donateData.usa.buttonLink}
+              href="https://docs.google.com/document/d/1NlG17ISL5wazzAQhviLAr1G1bSwu2GqjmD5VJXO6KGk/edit?tab=t.0"
               className="bg-white text-teal-700 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold flex items-center gap-3 transition"
             >
               <FaCheckCircle />
