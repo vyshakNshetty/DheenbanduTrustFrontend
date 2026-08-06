@@ -102,11 +102,11 @@ const Testimonials = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-1 mb-3">
+                  {/* <div className="flex gap-1 mb-3">
                     {[...Array(5)].map((_, i) => (
                       <FaStar key={i} className="text-yellow-400" />
                     ))}
-                  </div>
+                  </div> */}
 
                   <p className="text-gray-600 line-clamp-4">
                     "{testimonial.content}"
@@ -193,11 +193,11 @@ const Testimonials = () => {
                       {selectedTestimonial.role}
                     </p>
 
-                    <div className="flex mt-3 gap-1">
+                    {/* <div className="flex mt-3 gap-1">
                       {[...Array(5)].map((_, i) => (
                         <FaStar key={i} className="text-yellow-300" />
                       ))}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { FaBars, FaTimes, FaSun, FaMoon, FaHeart, FaUser } from 'react-icons/fa'
 import deena from "../../../public/dennabandu.png"
+import { useAuth } from '../../context/AuthContext'
 
 const Navbar = () => {
+  const { user } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { isDark, toggleTheme } = useTheme()
@@ -97,6 +99,8 @@ const Navbar = () => {
             Donate
           </Link>
 
+
+{user.role === 'admin' && (
           <Link
             to="/dashboard"
             className={`hidden md:flex p-2 rounded-full transition-colors ${
@@ -113,7 +117,7 @@ const Navbar = () => {
               }
             />
           </Link>
-
+          )}
           <button
             onClick={toggleMenu}
             className={`lg:hidden p-2 rounded-full transition-colors ${
@@ -165,10 +169,12 @@ const Navbar = () => {
                   <FaHeart />
                   Donate Now
                 </Link>
+                {user.role === 'admin' && (
                 <Link to="/dashboard" className="btn-secondary w-full justify-center gap-2">
                   <FaUser />
                   Dashboard
                 </Link>
+                )}
               </div>
             </div>
           </motion.div>

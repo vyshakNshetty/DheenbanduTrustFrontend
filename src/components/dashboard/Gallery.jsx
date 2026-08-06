@@ -10,6 +10,7 @@ const DashboardGallery = () => {
   const [galleryItems,setGalleryItems]=useState([]);
   const [loading,setLoading]=useState(true);
   const [editingItem,setEditingItem]=useState(null);
+  const [categories, setCategories] = useState([]);
   const [formData,setFormData]= useState({
     title:"",
     description:"",
@@ -19,6 +20,11 @@ const DashboardGallery = () => {
   })
 
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+
+const [newCategory, setNewCategory] = useState({
+  name: "",
+});
 
 const [newGallery, setNewGallery] = useState({
   title: "",
@@ -28,9 +34,10 @@ const [newGallery, setNewGallery] = useState({
   location: "",
 });
 
-  useEffect(()=>{
-    loadGallery();
-  },[]);
+useEffect(() => {
+  loadGallery();
+  loadCategories();
+}, []);
 
   const loadGallery = async () => {
     try {
@@ -44,6 +51,15 @@ const [newGallery, setNewGallery] = useState({
       setLoading(false);
     }
   }
+
+  const loadCategories = async () => {
+  try {
+    const response = await galleryService.getCategories();
+    setCategories(response);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const handleCreate = async () => {
   try {
@@ -100,21 +116,39 @@ const handleCreate = async () => {
       console.error(error);
     }
   }
+const handleCreateCategory = async () => {
+  try {
+    await galleryService.createCategory(newCategory);
 
+    await loadCategories();
 
-  const filteredItems = galleryItems.filter(item =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.location.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+    setNewCategory({
+      name: "",
+    });
 
-const CATEGORY_OPTIONS = [
-  { value: "education", label: "Education" },
-  { value: "healthcare", label: "Healthcare" },
-  { value: "women", label: "Women" },
-  { value: "sustainability", label: "Sustainability" },
-  { value: "community", label: "Community" },
-  { value: "volunteers", label: "Volunteers" },
-];
+    setShowCategoryModal(false);
+
+    alert("Category created successfully");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  const filteredItems = galleryItems.filter((item) =>
+  item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  (item.location || "")
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase())
+);
+
+// const CATEGORY_OPTIONS = [
+//   { value: "education", label: "Education" },
+//   { value: "healthcare", label: "Healthcare" },
+//   { value: "women", label: "Women" },
+//   { value: "sustainability", label: "Sustainability" },
+//   { value: "community", label: "Community" },
+//   { value: "volunteers", label: "Volunteers" },
+// ];
 
   if (loading){
     return(
@@ -134,12 +168,21 @@ const CATEGORY_OPTIONS = [
           <h1 className="text-3xl font-bold text-dark dark:text-white">
             Gallery Management
           </h1>
-          <button 
+     
+              <div> <button
+  onClick={() => setShowCategoryModal(true)}
+  className="btn-secondary gap-2"
+>
+  <FaPlus />
+  Add Category
+</button>
+   <button 
           onClick={() => setShowAddModal(true)}
           className="btn-primary gap-2">
             <FaPlus />
             Add Image
           </button>
+          </div>
         </div>
 
         <div className="relative mb-6">
@@ -170,6 +213,9 @@ const CATEGORY_OPTIONS = [
               <div className="p-4">
                 <h4 className="font-bold text-dark dark:text-white">{item.title}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{item.location}</p>
+                <p className="text-xs text-blue-600 font-medium">
+  {item.category_name}
+</p>
                 <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{new Date(item.created_at).toLocaleDateString()}</p>
                 <div className="mt-3 flex gap-2">
                   <button
@@ -187,6 +233,49 @@ const CATEGORY_OPTIONS = [
             </motion.div>
           ))}
         </div>
+        {showCategoryModal && (
+  <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+
+    <div className="bg-white p-6 rounded-lg w-[400px]">
+
+      <h2 className="text-xl font-bold mb-4">
+        Add Category
+      </h2>
+
+      <input
+        type="text"
+        className="input-field mb-4"
+        placeholder="Category Name"
+        value={newCategory.name}
+        onChange={(e) =>
+          setNewCategory({
+            name: e.target.value,
+          })
+        }
+      />
+
+      <div className="flex justify-end gap-3">
+
+        <button
+          className="btn-secondary"
+          onClick={() => setShowCategoryModal(false)}
+        >
+          Cancel
+        </button>
+
+        <button
+          className="btn-primary"
+          onClick={handleCreateCategory}
+        >
+          Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
         {showAddModal && (
   <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
 
@@ -213,7 +302,6 @@ const CATEGORY_OPTIONS = [
           setNewGallery({ ...newGallery, description: e.target.value })
         }
       />
-
 <select
   className="input-field mb-3"
   value={newGallery.category}
@@ -226,9 +314,9 @@ const CATEGORY_OPTIONS = [
 >
   <option value="">Select Category</option>
 
-  {CATEGORY_OPTIONS.map((item) => (
-    <option key={item.value} value={item.value}>
-      {item.label}
+  {categories.map((cat) => (
+    <option key={cat.id} value={cat.id}>
+      {cat.name}
     </option>
   ))}
 </select>
@@ -303,7 +391,7 @@ const CATEGORY_OPTIONS = [
             placeholder="Location"
         />
 
- <select
+<select
   className="input-field mb-3"
   value={formData.category}
   onChange={(e) =>
@@ -315,9 +403,9 @@ const CATEGORY_OPTIONS = [
 >
   <option value="">Select Category</option>
 
-  {CATEGORY_OPTIONS.map((item) => (
-    <option key={item.value} value={item.value}>
-      {item.label}
+  {categories.map((cat) => (
+    <option key={cat.id} value={cat.id}>
+      {cat.name}
     </option>
   ))}
 </select>

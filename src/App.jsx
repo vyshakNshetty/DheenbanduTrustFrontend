@@ -7,7 +7,8 @@ import { ToastProvider } from './context/ToastContext'
 import LoadingSpinner from './components/common/LoadingSpinner'
 import ScrollToTop from './components/common/ScrollToTop'
 import ErrorBoundary from './components/common/ErrorBoundary'
-
+import ProtectedRoute from './components/router/ProviderRoute';
+import { AuthProvider } from './context/AuthContext';
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
@@ -24,7 +25,7 @@ const Layout = lazy(() => import('./components/layout/Layout'))
 
 function App() {
   return (
-    
+    <AuthProvider>
       <ThemeProvider>
         <ToastProvider>
           <ActivityProvider>
@@ -41,7 +42,7 @@ function App() {
                     {/* <Route path="get-involved" element={<GetInvolved />} /> */}
                     <Route path="donate" element={<Donate />} />
                     <Route path="contact" element={<Contact />} />
-                    <Route path="dashboard/*" element={<Dashboard />} />
+                    <Route path="dashboard/*" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="*" element={<NotFound />} />
                   </Route>
                 </Routes>
@@ -51,6 +52,7 @@ function App() {
           </ActivityProvider>
         </ToastProvider>
       </ThemeProvider>
+      </AuthProvider>
     
   )
 }

@@ -11,7 +11,7 @@ const Footer = () => {
     'Organization': [
       { to: '/about', label: 'About Us' },
       { to: '/activities', label: 'Our Activities' },
-      { to: '/get-involved', label: 'Get Involved' },
+      // { to: '/get-involved', label: 'Get Involved' },
       { to: '/contact', label: 'Contact' },
     ],
     'Support': [
@@ -40,16 +40,16 @@ const Footer = () => {
               Together, we can make a difference.
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="https://www.facebook.com/deenabandhutrust/" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              {/* <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <FaTwitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              </a> */}
+              <a href="https://www.instagram.com/trustdeenabandhu?igsh=djVkaGJqaWlnMGpu" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <FaInstagram size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="https://youtube.com/@deenabandhuteacherresource2083" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <FaYoutube size={20} />
               </a>
             </div>
@@ -87,7 +87,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-3 text-gray-400">
             <FaMapMarkerAlt className="text-primary-400" />
-            <span className="text-sm">WXC3+QVM, Siddhartha Nagar, Chamarajanagar, Karnataka 571313, India</span>
+            <span className="text-sm">Behind Forest Nursery, Near PWD colony, Chamarajanagar, Karnataka 571313, India</span>
           </div>
         </div>
 

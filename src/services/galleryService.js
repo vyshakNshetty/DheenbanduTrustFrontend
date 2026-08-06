@@ -1,56 +1,87 @@
 import { api } from "./api";
 
 export const galleryService = {
-  // Create
+  // Create Gallery Image
   createImage: async (data) => {
-  const formData = new FormData();
+    const formData = new FormData();
 
-  formData.append("title", data.title);
-  formData.append("description", data.description);
-  formData.append("category", data.category);
-  formData.append("location", data.location);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("category", data.category);
 
-  if (data.image) {
-    formData.append("image", data.image);
-  }
+    if (data.location) {
+      formData.append("location", data.location);
+    }
 
-  return await api.post("/gallery/create/", formData);
-},
-  // Get all images
+    if (data.date) {
+      formData.append("date", data.date);
+    }
+
+    if (data.image) {
+      formData.append("image", data.image);
+    }
+
+    return await api.post("/gallery/create/", formData);
+  },
+
+  // Get All Gallery Images
   getImages: async () => {
     return await api.get("/gallery/");
   },
 
-  // Get single image
+  // Get Single Gallery Image
   getImage: async (id) => {
     return await api.get(`/gallery/${id}/`);
   },
 
-  // Update
+  // Update Gallery Image
   updateImage: async (id, data) => {
-  const formData = new FormData();
+    const formData = new FormData();
 
-  formData.append("title", data.title);
-  formData.append("description", data.description);
-  formData.append("category", data.category);
-  formData.append("location", data.location);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("category", data.category);
 
-  if (data.image) {
-    formData.append("image", data.image);
-  }
+    if (data.location) {
+      formData.append("location", data.location);
+    }
 
-  
-  return await api.put(`/gallery/${id}/`, formData);
+    if (data.date) {
+      formData.append("date", data.date);
+    }
 
-},
+    if (data.image) {
+      formData.append("image", data.image);
+    }
 
-  // Partial update
-  patchImage: async (id, imageData) => {
-    return await api.patch(`/gallery/${id}/`, imageData);
+    return await api.put(`/gallery/${id}/`, formData);
   },
 
-  // Delete
+  // Partial Update
+  patchImage: async (id, data) => {
+    const formData = new FormData();
+
+    Object.keys(data).forEach((key) => {
+      if (data[key] !== null && data[key] !== undefined) {
+        formData.append(key, data[key]);
+      }
+    });
+
+    return await api.patch(`/gallery/${id}/`, formData);
+  },
+
+  // Delete Gallery Image
   deleteImage: async (id) => {
     return await api.delete(`/gallery/${id}/`);
+  },
+
+  // Get Categories
+  getCategories: async () => {
+    return await api.get("/gallery/categories/");
+  },
+
+  // Create Category
+  createCategory: async (data) => {
+    return await api.post("/gallery/categories/", data);
   },
 };

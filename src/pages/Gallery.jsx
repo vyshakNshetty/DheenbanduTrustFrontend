@@ -9,6 +9,7 @@ const Gallery = () => {
   const [filter, setFilter] = useState('all')
   const [selectedImage, setSelectedImage] = useState(null)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [categories, setCategories] = useState([]);
   const [sortBy, setSortBy] = useState("newest");
   const INITIAL_COUNT = 6;
 const [showAllGallery, setShowAllGallery] = useState(false);
@@ -21,9 +22,20 @@ const [galleryData, setGalleryData] = useState({
 
 const [loading, setLoading] = useState(true);
 
+
 useEffect(() => {
   loadGallery();
+  loadCategories();
 }, []);
+
+const loadCategories = async () => {
+  try {
+    const response = await galleryService.getCategories();
+    setCategories(response);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
 const loadGallery = async () => {
@@ -42,18 +54,22 @@ const loadGallery = async () => {
   }
 };
 
-const categories = useMemo(() => {
-    const images = galleryData.images || [];
-    return ["all", ...new Set(images.map(img => img.category))];
-}, [galleryData.images]);
+const categoryButtons = useMemo(() => {
+  return [
+    { id: 0, name: "all" },
+    ...categories,
+  ];
+}, [categories]);
 
 const filteredImages = useMemo(() => {
 const allImages = galleryData.images || [];
 
 let images =
-    filter === "all"
-      ? [...allImages]
-      : allImages.filter(img => img.category === filter);
+  filter === "all"
+    ? [...allImages]
+    : allImages.filter(
+        (img) => img.category_name === filter
+      );
 
   images.sort((a, b) =>
   sortBy === "newest"
@@ -124,19 +140,19 @@ const closeLightbox = () => {
           
           
           <div className="flex flex-wrap gap-3 justify-center mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setFilter(category)}
-                className={`px-6 py-2 rounded-full font-medium transition-all ${
-                  filter === category
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-gray-100 dark:bg-dark/50 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark/70'
-                }`}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </button>
-            ))}
+         {categoryButtons.map((category) => (
+  <button
+    key={category.id}
+    onClick={() => setFilter(category.name)}
+    className={`px-6 py-2 rounded-full font-medium transition-all ${
+      filter === category.name
+        ? "bg-primary-600 text-white"
+        : "bg-gray-100 dark:bg-dark/50 text-gray-700 dark:text-gray-300"
+    }`}
+  >
+    {category.name === "all" ? "All" : category.name}
+  </button>
+))}
             <select
   value={sortBy}
   onChange={(e) => setSortBy(e.target.value)}

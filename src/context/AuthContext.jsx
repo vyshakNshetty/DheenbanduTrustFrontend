@@ -12,7 +12,11 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
+  const [user, setUser] = useState({
+    name:'vyshak',
+    role:'admin',
+  })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
