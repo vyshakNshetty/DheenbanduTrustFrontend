@@ -1,27 +1,31 @@
-import { api } from './api'
+import apii from './apii'
 
 export const authService = {
   login: async (credentials) => {
-    return api.post('/auth/login', credentials)
+    const response = await apii.post('auth/login/', credentials)
+
+    console.log("LOGIN API RESPONSE:", response.data)
+
+    return response.data
   },
 
   logout: async () => {
-    return api.post('/auth/logout')
+    return apii.post('auth/logout')
   },
 
   register: async (userData) => {
-    return api.post('/auth/register', userData)
+    return apii.post('auth/register', userData)
   },
 
   getCurrentUser: async () => {
-    return api.get('/auth/me')
+    return apii.get('auth/me')
   },
 
   resetPassword: async (email) => {
-    return api.post('/auth/reset-password', { email })
+    return apii.post('auth/reset-password', { email })
   },
 
   updateProfile: async (userData) => {
-    return api.put('/auth/profile', userData)
+    return apii.put('auth/profile', userData)
   },
 }

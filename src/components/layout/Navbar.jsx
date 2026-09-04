@@ -100,7 +100,7 @@ const Navbar = () => {
           </Link>
 
 
-{user.role === 'admin' && (
+{user?.role === 'admin' && (
           <Link
             to="/dashboard"
             className={`hidden md:flex p-2 rounded-full transition-colors ${

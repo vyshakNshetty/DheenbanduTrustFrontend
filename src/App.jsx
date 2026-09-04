@@ -9,6 +9,7 @@ import ScrollToTop from './components/common/ScrollToTop'
 import ErrorBoundary from './components/common/ErrorBoundary'
 import ProtectedRoute from './components/router/ProviderRoute';
 import { AuthProvider } from './context/AuthContext';
+import Login from './pages/Login';
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
@@ -36,6 +37,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
+                    <Route path='login' element={<Login />} />
                     <Route path="about" element={<About />} />
                     <Route path="activities" element={<Activities />} />
                     <Route path="gallery" element={<Gallery />} />
