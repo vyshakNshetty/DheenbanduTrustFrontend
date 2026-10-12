@@ -3,17 +3,24 @@ import { motion } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { useToast } from '../../context/ToastContext'
 import { FaSave, FaUser, FaBell, FaPalette, FaShieldAlt } from 'react-icons/fa'
-
+import { useAuth } from '../../context/AuthContext'
+import { authService } from '../../services/authService'
 const Settings = () => {
+  const {user}=useAuth()
   const { isDark, toggleTheme } = useTheme()
   const { showToast } = useToast()
   const [settings, setSettings] = useState({
-    name: 'Admin User',
-    email: 'admin@hopebridge.org',
+    name: user.name,
+    email: user.email,
     notifications: true,
     newsletter: true,
     language: 'en',
   })
+  // const [showChangePassword, setShowChangePassword] = useState(false)
+  const [showChangePassword, setShowChangePassword] = useState(false)
+
+const [oldPassword, setOldPassword] = useState('')
+const [newPassword, setNewPassword] = useState('')
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -22,6 +29,34 @@ const Settings = () => {
       [name]: type === 'checkbox' ? checked : value,
     })
   }
+
+  const handleChangePassword = async (e) => {
+  e.preventDefault()
+
+  try {
+
+    const response = await authService.changePassword({
+      old_password: oldPassword,
+      new_password: newPassword
+    })
+
+    alert(response.data.message)
+
+    setOldPassword('')
+    setNewPassword('')
+    setShowChangePassword(false)
+
+  } catch (error) {
+
+    console.log(error)
+
+    alert(
+      error.response?.data?.old_password?.[0] ||
+      error.response?.data?.new_password?.[0] ||
+      'Failed to change password'
+    )
+  }
+}
 
   const handleSave = () => {
     showToast('Settings saved successfully!', 'success')
@@ -70,12 +105,12 @@ const Settings = () => {
           </div>
 
           {/* Preferences */}
-          <div className="card p-6">
+          {/* <div className="card p-6">
             <h2 className="text-xl font-bold text-dark dark:text-white mb-4 flex items-center gap-2">
               <FaPalette className="text-primary-500" />
               Preferences
             </h2>
-            {/* <div className="space-y-4">
+            <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-medium text-dark dark:text-white">Dark Mode</p>
@@ -129,8 +164,8 @@ const Settings = () => {
                   <option value="fr">French</option>
                 </select>
               </div>
-            </div> */}
-          </div>
+            </div>
+          </div> */}
 
           {/* Security */}
           <div className="card p-6">
@@ -138,7 +173,9 @@ const Settings = () => {
               <FaShieldAlt className="text-primary-500" />
               Security
             </h2>
-            <button className="btn-secondary">
+            <button
+            onClick={() => setShowChangePassword(true)}
+             className="btn-secondary">
               Change Password
             </button>
           </div>
@@ -152,6 +189,66 @@ const Settings = () => {
           </button>
         </div>
       </motion.div>
+      {showChangePassword && (
+  <div className="card p-6 mt-4">
+
+    <h2 className="text-xl font-bold text-dark dark:text-white mb-4">
+      Change Password
+    </h2>
+
+    <form onSubmit={handleChangePassword}>
+
+      <div className="mb-4">
+        <label className="block mb-2">
+          Old Password
+        </label>
+
+        <input
+          type="password"
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
+          className="input-field"
+          placeholder="Enter old password"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block mb-2">
+          New Password
+        </label>
+
+        <input
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          className="input-field"
+          placeholder="Enter new password"
+        />
+      </div>
+
+      <div className="flex gap-2">
+
+        <button
+          type="submit"
+          className="btn-primary"
+        >
+          Change Password
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setShowChangePassword(false)}
+          className="btn-secondary"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+)}
     </div>
   )
 }

@@ -2,12 +2,20 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
-import { FaBars, FaTimes, FaSun, FaMoon, FaHeart, FaUser } from 'react-icons/fa'
+import {
+  FaBars,
+  FaTimes,
+  FaSun,
+  FaMoon,
+  FaHeart,
+  FaUser,
+  FaSignOutAlt
+} from 'react-icons/fa'
 import deena from "../../../public/dennabandu.png"
 import { useAuth } from '../../context/AuthContext'
 
 const Navbar = () => {
-  const { user } = useAuth()
+  const { user ,logout} = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { isDark, toggleTheme } = useTheme()
@@ -101,23 +109,78 @@ const Navbar = () => {
 
 
 {user?.role === 'admin' && (
-          <Link
-            to="/dashboard"
-            className={`hidden md:flex p-2 rounded-full transition-colors ${
-              isScrolled
-                ? 'hover:bg-gray-100 dark:hover:bg-gray-800'
-                : 'hover:bg-white/10'
-            }`}
-          >
-            <FaUser
-              className={
-                isScrolled
-                  ? 'text-gray-700 dark:text-gray-300'
-                  : 'text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]'
-              }
-            />
-          </Link>
-          )}
+  <div className="relative hidden md:block group">
+
+    {/* User Icon */}
+    <Link
+      to="/dashboard"
+      className={`flex p-2 rounded-full transition-colors ${
+        isScrolled
+          ? 'hover:bg-gray-100 dark:hover:bg-gray-800'
+          : 'hover:bg-white/10'
+      }`}
+    >
+      <FaUser
+        className={
+          isScrolled
+            ? 'text-gray-700 dark:text-gray-300'
+            : 'text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]'
+        }
+      />
+    </Link>
+
+    {/* Hover Dropdown */}
+    <div className="absolute right-0 top-full mt-2 w-48
+                    bg-white dark:bg-gray-800
+                    rounded-lg shadow-lg
+                    border border-gray-200 dark:border-gray-700
+                    opacity-0 invisible
+                    group-hover:opacity-100
+                    group-hover:visible
+                    transition-all duration-200">
+
+      {/* Username */}
+      <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center gap-2">
+          <FaUser className="text-primary-600" />
+
+          <div>
+            <p className="text-sm font-semibold text-gray-800 dark:text-white">
+              {user?.username || user?.name || 'Admin'}
+            </p>
+
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Administrator
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Dashboard */}
+      <Link
+        to="/dashboard"
+        className="block px-4 py-3 text-sm
+                   text-gray-700 dark:text-gray-200
+                   hover:bg-gray-100 dark:hover:bg-gray-700"
+      >
+        Dashboard
+      </Link>
+
+      {/* Logout */}
+      <button
+        onClick={logout}
+        className="w-full flex items-center gap-2
+                   px-4 py-3 text-sm text-left
+                   text-red-600
+                   hover:bg-red-50 dark:hover:bg-red-900/20"
+      >
+        <FaSignOutAlt />
+        Logout
+      </button>
+
+    </div>
+  </div>
+)}
           <button
             onClick={toggleMenu}
             className={`lg:hidden p-2 rounded-full transition-colors ${

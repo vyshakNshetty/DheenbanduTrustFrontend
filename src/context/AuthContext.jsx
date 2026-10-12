@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
       authService.getCurrentUser()
 
         .then(userData => {
-          console.log("CURRENT USER:", userData)
-          setUser(userData)
+          // console.log("CURRENT USER:", userData.data)
+          setUser(userData.data)
         })
 
         .catch(() => {
@@ -77,9 +77,9 @@ export const AuthProvider = ({ children }) => {
 
     console.log("USER RESPONSE:", userData)
 
-    setUser(userData)
+    setUser(userData.data)
 
-    return userData
+    return userData.data
 
   }, [])
 

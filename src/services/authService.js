@@ -28,4 +28,10 @@ export const authService = {
   updateProfile: async (userData) => {
     return apii.put('auth/profile', userData)
   },
+  changePassword: async (passwordData) => {
+    return apii.post(
+      'auth/change-password/',
+      passwordData
+    )
+  },
 }
