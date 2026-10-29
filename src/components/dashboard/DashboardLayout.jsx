@@ -19,6 +19,7 @@ const DashboardLayout = ({ children }) => {
     { to: '/dashboard/hero-section', icon: FaImage, label: 'Hero Section' },
     { to: '/dashboard/donations', icon: FaHeart, label: 'Donations' },
     // { to: '/dashboard/volunteers', icon: FaUsers, label: 'Volunteers' },
+    { to: '/dashboard/testimonials', icon: FaUsers, label: 'Volunteers' },
     { to: '/dashboard/activities', icon: FaCalendarAlt, label: 'Activities' },
     { to: '/dashboard/gallery', icon: FaImages, label: 'Gallery' },
     { to: '/dashboard/ourdonor', icon: FaDonate, label: 'Our donors' },

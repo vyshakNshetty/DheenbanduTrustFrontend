@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 // import { Helmet } from 'react-helmet-async'
 import DashboardLayout from '../components/dashboard/DashboardLayout'
 import LoadingSpinner from '../components/common/LoadingSpinner'
+import TestimonialsDashboard from '../components/dashboard/Testimonials'
 
 
 const Overview = lazy(() => import('../components/dashboard/Overview'))
@@ -15,6 +16,7 @@ const Aboutus = lazy(() => import('../components/dashboard/About/AboutDasboard')
 const DashboardContact = lazy(() => import('../components/dashboard/DashboardContact'))
 const Settings = lazy(() => import('../components/dashboard/Settings'))
 const HeroSection = lazy(() => import('../components/dashboard/website/HeroSection'))
+
 const AboutPreview = lazy(() =>import('../components/dashboard/AboutPreview/AboutPreview'));
 
 const Dashboard = () => {
@@ -30,6 +32,7 @@ const Dashboard = () => {
             <Route index element={<Overview />} />
             <Route path="donations" element={<Donations />} />
             {/* <Route path="volunteers" element={<Volunteers />} /> */}
+            <Route path='testimonials' element={ <TestimonialsDashboard/>}/>
             <Route path="activities" element={<Activities />} />
             <Route path="ourdonor" element={<Ourdonor />} />
             <Route path="gallery" element={<Gallery />} />
