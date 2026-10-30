@@ -68,15 +68,26 @@ post: async (endpoint, data) => {
   },
 
   delete: async (endpoint) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-        method: 'DELETE',
-      })
-      if (!response.ok) throw new Error('Network response was not ok')
-      return await response.json()
-    } catch (error) {
-      console.error('API DELETE error:', error)
-      throw error
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || "Unable to delete");
     }
-  },
+
+    // 204 means successful deletion with no response body
+    if (response.status === 204) {
+      return true;
+    }
+
+    return await response.json();
+
+  } catch (error) {
+    console.error("API DELETE error:", error);
+    throw error;
+  }
+},
 }

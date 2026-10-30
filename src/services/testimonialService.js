@@ -6,19 +6,11 @@ export const testimonialService = {
   },
 
   createTestimonial: async (formData) => {
-    return await api.post("/testimonials/", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    return await api.post("/testimonials/", formData);
   },
 
   updateTestimonial: async (id, formData) => {
-    return await api.put(`/testimonials/${id}/`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    return await api.put(`/testimonials/${id}/`, formData);
   },
 
   deleteTestimonial: async (id) => {
