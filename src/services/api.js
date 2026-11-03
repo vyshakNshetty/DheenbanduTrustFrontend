@@ -67,6 +67,37 @@ post: async (endpoint, data) => {
   }
   },
 
+  patch: async (endpoint, data) => {
+  try {
+    const isFormData = data instanceof FormData;
+
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: "PATCH",
+      headers: isFormData
+        ? {}
+        : {
+            "Content-Type": "application/json",
+          },
+      body: isFormData ? data : JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || "Unable to update");
+    }
+
+    if (response.status === 204) {
+      return null;
+    }
+
+    return await response.json();
+
+  } catch (error) {
+    console.error("PATCH Error:", error);
+    throw error;
+  }
+},
+
   delete: async (endpoint) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {

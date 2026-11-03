@@ -25,11 +25,7 @@ export const getAboutSection = (id) =>
 //   });
 
 export const updateAboutSection = (id, formData) =>
-  api.put(`/about/${id}/`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  api.patch(`/about/${id}/`, formData);
 
 // export const deleteAboutSection = (id) =>
 //   api.delete(`/about/${id}/`);

@@ -18,7 +18,7 @@ import TeamMemberCard from "./TeamMemberCard";
 
 const AboutDashboard = () => {
   const [loading, setLoading] = useState(true);
-
+  const [draftSection, setDraftSection] = useState(null);
   const [sections, setSections] = useState([]);
   const [team, setTeam] = useState([]);
 
@@ -52,23 +52,28 @@ const AboutDashboard = () => {
 
   // ---- Sections ----
 
-  const handleSaveSection = async (sectionId, formData) => {
-    try {
-      setSavingId(sectionId);
-      const updated = await updateAboutSection(sectionId, formData);
+ const handleSaveSection = async (sectionId, formData) => {
+  try {
+    setSavingId(sectionId || "new");
 
-      setSections((prev) =>
-        prev.map((s) => (s.id === sectionId ? { ...s, ...updated } : s))
-      );
-
-      alert("Section updated successfully");
-    } catch (error) {
-      console.error(error);
-      alert("Unable to update section");
-    } finally {
-      setSavingId(null);
+    if (sectionId) {
+      await updateAboutSection(sectionId, formData);
+      alert("Story updated successfully");
+    } else {
+      await createAboutSection(formData);
+      setDraftSection(null);
+      alert("Story added successfully");
     }
-  };
+
+    await loadAll();
+
+  } catch (error) {
+    console.error("Story error:", error);
+    alert("Unable to save story");
+  } finally {
+    setSavingId(null);
+  }
+};
 
   // ---- Team Members ----
 
@@ -134,20 +139,49 @@ const AboutDashboard = () => {
       </div>
 
       {/* Story Sections (Founder / Journey) */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-bold text-gray-700">Story Sections</h2>
+     {/* Story Sections */}
+<div className="space-y-4">
+  <div className="flex items-center justify-between">
+    <h2 className="text-xl font-bold text-gray-700">
+      Story Sections ({sections.length}/2)
+    </h2>
 
-        <div className="grid lg:grid-cols-2 gap-6">
-          {sections.map((section) => (
-            <AboutSectionCard
-              key={section.id}
-              section={section}
-              onSave={handleSaveSection}
-              saving={savingId === section.id}
-            />
-          ))}
-        </div>
-      </div>
+    {sections.length < 2 && !draftSection && (
+      <button
+        onClick={() => setDraftSection({
+          title: "",
+          description: "",
+          image: null,
+        })}
+        className="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm"
+      >
+        <FaPlus />
+        Add Story
+      </button>
+    )}
+  </div>
+
+  <div className="grid lg:grid-cols-2 gap-6">
+
+    {draftSection && (
+      <AboutSectionCard
+        section={draftSection}
+        onSave={handleSaveSection}
+        saving={savingId === "new"}
+      />
+    )}
+
+    {sections.map((section) => (
+      <AboutSectionCard
+        key={section.id}
+        section={section}
+        onSave={handleSaveSection}
+        saving={savingId === section.id}
+      />
+    ))}
+
+  </div>
+</div>
 
       {/* Board of Trustees */}
       <div className="space-y-4">
