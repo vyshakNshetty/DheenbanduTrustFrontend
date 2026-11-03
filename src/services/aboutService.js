@@ -17,12 +17,8 @@ export const getAboutSections = () => api.get("/about/");
 export const getAboutSection = (id) =>
   api.get(`/about/${id}/`);
 
-// export const createAboutSection = (formData) =>
-//   api.post("/about/", formData, {
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//     },
-//   });
+export const createAboutSection = (formData) =>
+  api.post("/about/", formData);
 
 export const updateAboutSection = (id, formData) =>
   api.patch(`/about/${id}/`, formData);
