@@ -5,6 +5,7 @@ import { FaSpinner, FaPlus } from "react-icons/fa";
 
 
 import {
+  createAboutSection,
   getAboutSections,
   getTeamMembers,
   updateAboutSection,
