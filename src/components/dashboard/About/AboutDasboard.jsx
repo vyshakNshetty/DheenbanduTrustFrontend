@@ -53,7 +53,7 @@ const AboutDashboard = () => {
 
   // ---- Sections ----
 
- const handleSaveSection = async (sectionId, formData) => {
+const handleSaveSection = async (sectionId, formData) => {
   try {
     setSavingId(sectionId || "new");
 
@@ -63,19 +63,19 @@ const AboutDashboard = () => {
     } else {
       await createAboutSection(formData);
       setDraftSection(null);
-      alert("Story added successfully");
+      alert("Story created successfully");
     }
 
     await loadAll();
 
   } catch (error) {
-    console.error("Story error:", error);
-    alert("Unable to save story");
+    console.error("Story save error:", error);
+    alert(error.message || "Unable to save story");
+
   } finally {
     setSavingId(null);
   }
 };
-
   // ---- Team Members ----
 
   const handleSaveMember = async (memberId, formData) => {
@@ -140,8 +140,9 @@ const AboutDashboard = () => {
       </div>
 
       {/* Story Sections (Founder / Journey) */}
-     {/* Story Sections */}
+{/* Story Sections */}
 <div className="space-y-4">
+
   <div className="flex items-center justify-between">
     <h2 className="text-xl font-bold text-gray-700">
       Story Sections ({sections.length}/2)
@@ -149,11 +150,7 @@ const AboutDashboard = () => {
 
     {sections.length < 2 && !draftSection && (
       <button
-        onClick={() => setDraftSection({
-          title: "",
-          description: "",
-          image: null,
-        })}
+        onClick={handleAddStory}
         className="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm"
       >
         <FaPlus />
@@ -162,15 +159,7 @@ const AboutDashboard = () => {
     )}
   </div>
 
-  <div className="grid lg:grid-cols-2 gap-6">
-
-    {draftSection && (
-      <AboutSectionCard
-        section={draftSection}
-        onSave={handleSaveSection}
-        saving={savingId === "new"}
-      />
-    )}
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
     {sections.map((section) => (
       <AboutSectionCard
@@ -180,6 +169,14 @@ const AboutDashboard = () => {
         saving={savingId === section.id}
       />
     ))}
+
+    {draftSection && (
+      <AboutSectionCard
+        section={draftSection}
+        onSave={handleSaveSection}
+        saving={savingId === "new"}
+      />
+    )}
 
   </div>
 </div>

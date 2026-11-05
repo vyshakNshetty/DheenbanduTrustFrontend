@@ -28,9 +28,10 @@ post: async (endpoint, data) => {
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      console.error("API Error:", error);
-      throw error;
+      const errorText = await response.json();
+      console.error("API Error:", errorText);
+      throw new Error(errorText || "Request failed");
+
     }
 
     return await response.json();
