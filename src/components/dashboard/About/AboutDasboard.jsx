@@ -34,6 +34,8 @@ const AboutDashboard = () => {
     loadAll();
   }, []);
 
+
+
   const loadAll = async () => {
     setLoading(true);
     try {
@@ -52,6 +54,25 @@ const AboutDashboard = () => {
   };
 
   // ---- Sections ----
+
+  const handleAddStory = () => {
+  if (sections.length >= 2) return;
+
+  const existingTypes = sections.map(
+    (section) => section.section_type
+  );
+
+  const availableType = !existingTypes.includes("founder")
+    ? "founder"
+    : "journey";
+
+  setDraftSection({
+    section_type: availableType,
+    title: "",
+    description: "",
+    image: null,
+  });
+};
 
 const handleSaveSection = async (sectionId, formData) => {
   try {
