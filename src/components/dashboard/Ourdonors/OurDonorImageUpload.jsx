@@ -15,7 +15,7 @@ const OurDonorImageUpload = ({
       </label>
 
       {/* Preview */}
-      <div className="w-full h-64 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 overflow-hidden bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
+      <div className="w-full h-64 rounded-xl  border-2 border-dashed border-gray-300 dark:border-gray-700 overflow-hidden bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
         {preview ? (
           <img
             src={preview}

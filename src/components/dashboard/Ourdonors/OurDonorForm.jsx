@@ -61,39 +61,41 @@ const OurDonorForm = ({ donor = null, onClose, onSuccess }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const data = new FormData();
+  const data = new FormData();
 
-    data.append("title", formData.title);
-    data.append("description", formData.description);
-    data.append("is_active", formData.is_active);
+  data.append("title", formData.title);
+  data.append("description", formData.description);
+  data.append("is_active", formData.is_active);
 
-    if (formData.image) {
-      data.append("image", formData.image);
+  if (formData.image) {
+    data.append("image", formData.image);
+  }
+
+  try {
+    setSaving(true);
+
+    if (donor) {
+      await activityService.updateOurdonor(donor.id, data);
+    } else {
+      await activityService.createOurdonor(data);
     }
 
-    try {
-      setSaving(true);
-
-      if (donor) {
-        await activityService.updateOurdonor(donor.id, data);
-      } else {
-        await activityService.createOurDonor(data);
-      }
-
-      if (onSuccess) {
-        onSuccess();
-      }
-
-      onClose();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setSaving(false);
+    if (onSuccess) {
+      onSuccess();
     }
-  };
+
+    onClose();
+
+  } catch (error) {
+    console.error("Donor save error:", error);
+    alert("Unable to save donor");
+  } finally {
+    setSaving(false);
+  }
+};
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-5">

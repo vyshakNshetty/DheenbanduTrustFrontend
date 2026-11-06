@@ -44,13 +44,14 @@ export const activityService = {
   },
 
   // create Ourdonor
-   createOurdonor: async (ourdonorData) => {
-    return await api.post("/ourdonor/create/", ourdonorData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-  },
+createOurdonor: async (ourdonorData) => {
+  return await api.post("/ourdonor/create/", ourdonorData);
+},
+
+// update Ourdonor
+updateOurdonor: async (id, ourdonorData) => {
+  return await api.put(`/ourdonor/${id}/`, ourdonorData);
+},
 
   // get single Ourdonor
   getOurdonorById: async (id) => {
@@ -58,14 +59,7 @@ export const activityService = {
   },
 
 
-  // update Ourdonor
-  updateOurdonor: async (id, ourdonorData) => {
-    return await api.put(`/ourdonor/${id}/`, ourdonorData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-  },
+ 
 
   // Delete activity
   deleteOurdonor: async (id) => {

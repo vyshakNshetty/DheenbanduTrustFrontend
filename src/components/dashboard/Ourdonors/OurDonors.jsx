@@ -65,7 +65,7 @@ const OurDonors = () => {
     try {
       setDeleting(true);
 
-      await ourDonorService.deleteOurDonor(selectedDonor.id);
+      await activityService.deleteOurdonor(selectedDonor.id);
 
       await loadDonors();
 
