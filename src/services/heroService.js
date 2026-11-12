@@ -1,23 +1,34 @@
-import { api } from "./api";
+import apii from "./apii";
 
 const HERO_SECTION_ENDPOINT = "/hero/";
 
-// Get Hero Section
+// GET Hero Section (Public)
 export const getHeroSection = async () => {
   try {
-    return await api.get(HERO_SECTION_ENDPOINT);
+    const response = await apii.get(HERO_SECTION_ENDPOINT, {
+      skipAuth: true,
+    });
+
+    return response.data;
+
   } catch (error) {
-    console.error("Error fetching hero section:", error);
+    console.error("GET Hero Error:", error.response?.data || error);
     throw error;
   }
 };
 
-// Update Hero Section
+// PUT Hero Section (Admin only)
 export const updateHeroSection = async (heroData) => {
   try {
-    return await api.put(HERO_SECTION_ENDPOINT, heroData);
+    const response = await apii.put(
+      HERO_SECTION_ENDPOINT,
+      heroData
+    );
+
+    return response.data;
+
   } catch (error) {
-    console.error("Error updating hero section:", error);
+    console.error("PUT Hero Error:", error.response?.data || error);
     throw error;
   }
 };

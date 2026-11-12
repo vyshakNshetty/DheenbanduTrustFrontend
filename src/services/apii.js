@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apii = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api/`,
+  baseURL: "http://127.0.0.1:8001/api/",
 });
 
 apii.interceptors.request.use((config) => {
