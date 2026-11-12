@@ -90,10 +90,10 @@ const HeroSection = () => {
   };
 
   const handleSubmit = async () => {
-    if (!form.badge.trim()) {
-      alert("Badge is required");
-      return;
-    }
+    // if (!form.badge.trim()) {
+    //   alert("Badge is required");
+    //   return;
+    // }
 
     if (!form.title.trim()) {
       alert("Title is required");
@@ -110,7 +110,7 @@ const HeroSection = () => {
 
       const formData = new FormData();
 
-  formData.append("badge", form.badge);
+  formData.append("badge", form.badge || "");
   formData.append("title", form.title);
   formData.append("description", form.description);
   formData.append("is_active", form.is_active);
