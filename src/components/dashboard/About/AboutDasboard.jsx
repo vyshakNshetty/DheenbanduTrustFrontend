@@ -109,7 +109,7 @@ const handleSaveSection = async (sectionId, formData) => {
           prev.map((m) => (m.id === memberId ? { ...m, ...updated } : m))
         );
       } else {
-        const created = await addTeamMember(formData);
+        const created = await createTeamMember(formData);
         setTeam((prev) => [...prev, created]);
         setDraftMember(null);
       }

@@ -1,4 +1,5 @@
 import { api } from "./api";
+import apii from "../services/apii"
 
 export const getAboutPreview = () => api.get("/about/preview/");
 
@@ -27,36 +28,38 @@ export const updateAboutSection = (id, formData) =>
 //   api.delete(`/about/${id}/`);
 
 
-
 // Get all team members
-export const getTeamMembers = () => api.get("/team/");
+export const getTeamMembers = async () => {
+  const response = await apii.get("/team/");
+  return response.data;
+};
 
 // Get single team member
-export const getTeamMember = (id) =>
-  api.get(`/team/${id}/`);
+export const getTeamMember = async (id) => {
+  const response = await apii.get(`/team/${id}/`);
+  return response.data;
+};
 
 // Create team member
-export const createTeamMember = (formData) =>
-  api.post("/team/create/", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+export const createTeamMember = async (formData) => {
+  const response = await apii.post("/team/create/", formData);
+  return response.data;
+};
 
 // Update team member
-export const updateTeamMember = (id, formData) =>
-  api.put(`/team/${id}/`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+export const updateTeamMember = async (id, formData) => {
+  const response = await apii.put(`/team/${id}/`, formData);
+  return response.data;
+};
 
 // Delete team member
-export const deleteTeamMember = (id) =>
-  api.delete(`/team/${id}/`);
+export const deleteTeamMember = async (id) => {
+  const response = await apii.delete(`/team/${id}/`);
+  return response.data;
+};
 
-
-export const getContactMessages = () => api.get("/contact/");
+// -------------------------------------------------------------
+export const getContactMessages = () => apii.get("/contact/");
 
 export const sendContactMessage = (data) =>
   api.post("/contact/", data);
