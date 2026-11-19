@@ -204,10 +204,10 @@ const TestimonialsDashboard = () => {
         {/* Header */}
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-indigo-600">
+            {/* <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-indigo-600">
               <FaQuoteLeft />
               WEBSITE CONTENT
-            </div>
+            </div> */}
 
             <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
               Testimonials
@@ -221,7 +221,7 @@ const TestimonialsDashboard = () => {
           <button
             type="button"
             onClick={openAddModal}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+            className="inline-flex items-center justify-center gap-2 rounded-xl btn-primary px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700"
           >
             <FaPlus />
             Add Testimonial

@@ -8,15 +8,31 @@ const DashboardContact = () => {
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [search, setSearch] = useState("");
 
-  const loadMessages = async () => {
-    try {
-      const res = await getContactMessages();
-      setMessages(res);
-      setFilteredMessages(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+const loadMessages = async () => {
+  try {
+    const res = await getContactMessages();
+
+    // console.log("Contact API response:", res);
+
+    const data = Array.isArray(res)
+      ? res
+      : Array.isArray(res?.results)
+      ? res.results
+      : Array.isArray(res?.data)
+      ? res.data
+      : Array.isArray(res?.data?.results)
+      ? res.data.results
+      : [];
+
+    setMessages(data);
+    setFilteredMessages(data);
+
+  } catch (err) {
+    console.log("Error loading messages:", err);
+    setMessages([]);
+    setFilteredMessages([]);
+  }
+};
 
   useEffect(() => {
     loadMessages();
