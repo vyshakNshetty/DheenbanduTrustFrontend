@@ -21,14 +21,24 @@ const AboutPreview = () => {
     loadaboutPre();
   },[])
 
-  const loadaboutPre =async()=>{
-      try {
-        const res = await getAboutPreview();
-        setData(res);
-      } catch (error) {
-        console.error(error)
-      }
+const loadaboutPre = async () => {
+  try {
+    const res = await getAboutPreview();
+
+    setData({
+      title: res?.title || "",
+      short_description: res?.short_description || "",
+      full_description: res?.full_description || "",
+      youtube_url: res?.youtube_url || "",
+      highlights: Array.isArray(res?.highlights)
+        ? res.highlights
+        : [],
+    });
+
+  } catch (error) {
+    console.error("Failed to load About Preview:", error);
   }
+};
   return (
     <>
     <section className="section-padding">
@@ -58,9 +68,9 @@ const AboutPreview = () => {
   <FaArrowRight className="inline-block ml-1 transition-transform group-hover:translate-x-1" />
 </button>
             <ul className="mt-8 space-y-3">
-              {data.highlights.slice(0, 4).map((highlight) => (
+           {(data.highlights || []).slice(0, 4).map((highlight,index) => (
                 <motion.li
-                  key={highlight.order}
+                  key={highlight.id ?? `highlight-${index}`}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: highlight.order * 0.1 }}
@@ -90,13 +100,19 @@ const AboutPreview = () => {
   className="relative"
 >
   <div className="relative rounded-2xl overflow-hidden shadow-card-hover aspect-video">
-    <iframe
-      className="w-full h-full"
-      src={data.youtube_url}
-      title="About Deenabandhu Trust"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    />
+{data.youtube_url ? (
+  <iframe
+    className="w-full h-full"
+    src={data.youtube_url}
+    title="About Deenabandhu Trust"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+) : (
+  <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-800">
+    Video not available
+  </div>
+)}
   </div>
 
   <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary-500/10 rounded-full blur-3xl" />
@@ -152,12 +168,9 @@ const AboutPreview = () => {
 
           <div className="grid md:grid-cols-2 gap-5">
 
-            {data.highlights.map((item) => (
+            {(data.highlights || []).map((item,index) => (
 
-              <div
-                key={item.order}
-                className="flex items-start gap-3"
-              >
+             <div key={item.id ?? `modal-highlight-${index}`}>
 
                 <FaCheckCircle className="text-primary-600 mt-1" />
 
