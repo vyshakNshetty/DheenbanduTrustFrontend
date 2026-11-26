@@ -22,7 +22,7 @@ const Activities = () => {
 const loadAct = async () => {
   try {
     const data = await activityService.getActivities();
-    console.log("API Response:", data);
+    // console.log("API Response:", data);
     setActivities(data);
   } catch (error) {
     console.error(error);

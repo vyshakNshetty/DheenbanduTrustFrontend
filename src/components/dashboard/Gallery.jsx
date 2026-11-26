@@ -43,7 +43,7 @@ useEffect(() => {
     try {
       const response = await galleryService.getImages();
       setGalleryItems(response);
-      console.log("data",response)
+      // console.log("data",response)
     } catch (error) {
       console.error(error)
       

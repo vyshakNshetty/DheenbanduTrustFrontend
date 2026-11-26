@@ -36,7 +36,7 @@ const About = () => {
     try {
       const res = await getTeamMembers();
       setData(res)
-      console.log(res)
+      // console.log(res)
 
     } catch (error) {
       console.log(error);
