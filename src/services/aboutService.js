@@ -30,7 +30,10 @@ export const updateAboutSection = (id, formData) =>
 
 // Get all team members
 export const getTeamMembers = async () => {
-  const response = await apii.get("/team/");
+  const response = await apii.get("/team/", {
+    skipAuth: true,
+  });
+
   return response.data;
 };
 

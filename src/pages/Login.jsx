@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       const response = await login(email, password)
-      console.log("LOGIN RESPONSE:", response)
+      // console.log("LOGIN RESPONSE:", response)
 
       // Only allow admin to enter dashboard
       // if (response.data.role !== 'admin') {

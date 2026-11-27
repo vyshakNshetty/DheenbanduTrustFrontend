@@ -63,25 +63,37 @@ export const AuthProvider = ({ children }) => {
 
   const login = useCallback(async (email, password) => {
 
-    const response = await authService.login({
-      email,
-      password
-    })
+  const response = await authService.login({
+    email,
+    password
+  })
 
-    console.log("TOKEN RESPONSE:", response)
+  // console.log("LOGIN RESPONSE:", response)
 
-    localStorage.setItem('access_token', response.access)
-    localStorage.setItem('refresh_token', response.refresh)
+  // console.log("ACCESS TOKEN:", response.access)
+  // console.log("REFRESH TOKEN:", response.refresh)
 
-    const userData = await authService.getCurrentUser()
+  if (!response.access || !response.refresh) {
+    throw new Error("Access or refresh token missing from login response")
+  }
 
-    console.log("USER RESPONSE:", userData)
+  localStorage.setItem('access_token', response.access)
+  localStorage.setItem('refresh_token', response.refresh)
 
-    setUser(userData.data)
+  // console.log(
+  //   "STORED ACCESS TOKEN:",
+  //   !!localStorage.getItem('access_token')
+  // )
 
-    return userData.data
+  const userData = await authService.getCurrentUser()
 
-  }, [])
+  // console.log("CURRENT USER:", userData.data)
+
+  setUser(userData.data)
+
+  return userData.data
+
+}, [])
 
   const logout = useCallback(async () => {
 
